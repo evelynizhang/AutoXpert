@@ -3,7 +3,7 @@
 Team:
 
 * Evelyn Zhang - Service microservice
-* Person 2 - Which microservice?
+* My Nguyen - Sales microservice?
 
 ## Design
 
