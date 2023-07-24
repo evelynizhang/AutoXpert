@@ -4,25 +4,42 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 import json
 from django.http import JsonResponse
-from .models import AutomobileVO, Appointment,Techinican
+from .models import AutomobileVO, Appointment,Technician
 from common.json import ModelEncoder
 
 
 class TechnicianEncoder(ModelEncoder):
-   model = Techinican
+   model = Technician
    properties = [
       "first_name", "last_name", "employee_id","id",
    ]
 
+class TechnicianDetailEncoder(ModelEncoder):
+   model = Technician
+   properties = ["employee_id"]
+
+
+class AutomobileVOEncoder(ModelEncoder):
+   model = AutomobileVO
+   properties = ["vin", "sold"]
+
+class AppointmentEncoder(ModelEncoder):
+   model = Appointment
+   properties = ["date_time", "reason", "status", "vin", "customer", "technician", "id"]
+   encoders={
+      "technician": TechnicianDetailEncoder(),
+   }
+
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):
     if request.method == "GET":
-      technicians = Techinican.objects.all()
+      technicians = Technician.objects.all()
       return JsonResponse({"technicians": technicians}, encoder=TechnicianEncoder, safe=False)
     else:
        try:
           content = json.loads(request.body)
-          technician = Techinican.objects.create(**content)
+          technician = Technician.objects.create(**content)
+          print(technician)
           return JsonResponse(technician, encoder=TechnicianEncoder, safe=False)
        except:
           return JsonResponse({"message": "Invalid input"}, status=400)
@@ -30,8 +47,35 @@ def api_list_technicians(request):
 @require_http_methods(["DELETE"])
 def api_show_technician(request, pk):
    if request.method == "DELETE":
-      count, _ = Techinican.objects.filter(id=pk).delete()
+      count, _ = Technician.objects.filter(id=pk).delete()
       if count > 0:
         return JsonResponse({"delete": count > 0})
       else:
         return JsonResponse({"message": "Invalid techician id"}, status=400)
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_appointments(request):
+    if request.method == "GET":
+      appointments = Appointment.objects.all()
+      return JsonResponse({"Appointments": appointments}, encoder=AppointmentEncoder, safe=False)
+    else:
+      content = json.loads(request.body)
+      try:
+          technician_employee_id = content["technician"]
+          technician = Technician.objects.get(employee_id=technician_employee_id)
+          content["technician"] = technician
+      except technician.DoesNotExist:
+          return JsonResponse({"message": "Invalid technician employee id"}, status=400)
+      appointment = Appointment.objects.create(**content)
+      return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
+
+
+@require_http_methods(["DELETE"])
+def api_show_appointment(request, pk):
+   if request.method == "DELETE":
+      count, _ = Appointment.objects.filter(id=pk).delete()
+      if count > 0:
+        return JsonResponse({"delete": count > 0})
+      else:
+        return JsonResponse({"message": "Invalid appointment id"}, status=400)
