@@ -2,7 +2,7 @@
 
 Team:
 
-* Person 1 - Which microservice?
+* Evelyn Zhang - Service microservice
 * Person 2 - Which microservice?
 
 ## Design
