@@ -8,7 +8,8 @@ import ServiceList from "./ServiceList"
 import VinList from "./VinForm"
 import ManufacturerList from "./ManufacturerList"
 import ManufacturerForm from "./ManufacturerForm"
-
+import SalespeopleList from './SalespeopleList';
+import SalespersonForm from './SalespersonForm';
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
           </Route>
           <Route path="appointments">
             <Route index element={<ServiceList />} />
+          </Route>
+          <Route path="salespeople">
+            <Route index element={<SalespeopleList />} />
+            <Route path='new' element={<SalespersonForm />}  />
           </Route>
         </Routes>
       </div>
