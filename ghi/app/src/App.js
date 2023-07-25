@@ -9,6 +9,7 @@ import VinList from "./VinForm"
 import ManufacturerList from "./ManufacturerList"
 import ManufacturerForm from "./ManufacturerForm"
 import ServiceHistoryList from "./ServiceHistory"
+import VehicleList from "./VehicleList"
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="vins">
             <Route index element={<VinList />} />
+          </Route>
+          <Route path="models">
+            <Route index element={<VehicleList />} />
           </Route>
           <Route path="manufacturers">
             <Route index element={<ManufacturerList />} />
