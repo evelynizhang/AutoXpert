@@ -14,6 +14,7 @@ import CustomerList from './CustomersList';
 import CustomerForm from './CustomerForm';
 import SaleList from './SaleList';
 import SaleForm from './SaleForm';
+import SalespersonHistory from './SalespersonHistory';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path="salespeople">
             <Route index element={<SalespeopleList />} />
             <Route path='new' element={<SalespersonForm />}  />
+            <Route path='history' element={<SalespersonHistory />} />
           </Route>
           <Route path="customers">
             <Route index element={<CustomerList />} />
