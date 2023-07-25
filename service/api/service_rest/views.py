@@ -6,6 +6,8 @@ import json
 from django.http import JsonResponse
 from .models import AutomobileVO, Appointment,Technician
 from common.json import ModelEncoder
+import datetime
+from datetime import time
 
 
 class TechnicianEncoder(ModelEncoder):
@@ -13,6 +15,8 @@ class TechnicianEncoder(ModelEncoder):
    properties = [
       "first_name", "last_name", "employee_id","id",
    ]
+
+
 
 class TechnicianDetailEncoder(ModelEncoder):
    model = Technician
@@ -25,10 +29,12 @@ class AutomobileVOEncoder(ModelEncoder):
 
 class AppointmentEncoder(ModelEncoder):
    model = Appointment
-   properties = ["date_time", "reason", "status", "vin", "customer", "technician", "id"]
+   properties = ["date_time", "reason", "date", "status", "vin", "customer", "technician", "id"]
    encoders={
       "technician": TechnicianDetailEncoder(),
    }
+   def get_extra_data(self, o):
+        return {"time": o.date_time.date()}
 
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):
@@ -39,7 +45,6 @@ def api_list_technicians(request):
        try:
           content = json.loads(request.body)
           technician = Technician.objects.create(**content)
-          print(technician)
           return JsonResponse(technician, encoder=TechnicianEncoder, safe=False)
        except:
           return JsonResponse({"message": "Invalid input"}, status=400)
@@ -58,7 +63,7 @@ def api_show_technician(request, pk):
 def api_list_appointments(request):
     if request.method == "GET":
       appointments = Appointment.objects.all()
-      return JsonResponse({"Appointments": appointments}, encoder=AppointmentEncoder, safe=False)
+      return JsonResponse({"appointments": appointments}, encoder=AppointmentEncoder, safe=False)
     else:
       content = json.loads(request.body)
       try:
@@ -91,7 +96,7 @@ def api_list_automobilesVO(request):
 def api_status_canceled(request, pk):
     if request.method == "PUT":
        appointment = Appointment.objects.get(id=pk)
-       appointment.status = "Canceled"
+       appointment.status = "canceled"
        appointment.save()
        return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
 
@@ -99,6 +104,6 @@ def api_status_canceled(request, pk):
 def api_status_finished(request, pk):
    if request.method == "PUT":
        appointment = Appointment.objects.get(id=pk)
-       appointment.status = "Finished"
+       appointment.status = "finished"
        appointment.save()
        return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)

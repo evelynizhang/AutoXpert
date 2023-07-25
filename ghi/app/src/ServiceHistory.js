@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 
-function TechnicianList() {
-  const[technicians, setTechnicians] = useState([])
+function ServiceHistory() {
+  const[services, setService] = useState([])
 
   const getData = async () => {
-    const url = "http://localhost:8080/api/technicians/";
+    const url = "http://localhost:8080/api/appointments/";
     const response = await fetch(url)
 
     if (response.ok) {
@@ -46,4 +46,4 @@ function TechnicianList() {
   )
 }
 
-export default TechnicianList;
+export default ServiceHistory;
