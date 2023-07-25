@@ -13,6 +13,9 @@ function Nav() {
           <li className="nav-item">
               <NavLink className="nav-link active" aria-current="page" to="/technicians">Technicians</NavLink>
           </li>
+          <li className="nav-item">
+              <NavLink className="nav-link active" aria-current="page" to="/technicians/create">Add a Technician</NavLink>
+          </li>
           </ul>
         </div>
       </div>
