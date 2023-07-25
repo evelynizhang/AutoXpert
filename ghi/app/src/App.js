@@ -55,7 +55,6 @@ function App() {
           <Route path="salespeople">
             <Route index element={<SalespeopleList />} />
             <Route path='new' element={<SalespersonForm />}  />
-            <Route path='history' element={<SalespersonHistory />} />
           </Route>
           <Route path="customers">
             <Route index element={<CustomerList />} />
@@ -64,6 +63,7 @@ function App() {
           <Route path="sales">
             <Route index element={<SaleList />} />
             <Route path='new' element={<SaleForm />}  />
+            <Route path='history' element={<SalespersonHistory />} />
           </Route>
         </Routes>
       </div>
