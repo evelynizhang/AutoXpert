@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 
 function ServiceList() {
   const[services, setServices] = useState([])
+  const[service, setService] = useState([])
 
   const getData = async () => {
     const url = "http://localhost:8080/api/appointments/";
@@ -17,6 +18,7 @@ function ServiceList() {
   useEffect(() => {
     getData()
   }, [])
+
 
 
     const[vins, setVins] = useState([])
@@ -47,6 +49,10 @@ function ServiceList() {
       services[i]["vip"] = VIP[i]
     }
 
+   function cancel(service){
+    console.log(service.status)
+   }
+
 
   return (
     <React.Fragment>
@@ -75,7 +81,7 @@ function ServiceList() {
                 <td>{ service.technician.employee_id } </td>
                 <td>{ service.reason }</td>
                 <td>
-                  <button>Cancel</button><button>Finish</button>
+                <button onClick={cancel}>Cancel</button><button>Finish</button>
                 </td>
               </tr>
             );
