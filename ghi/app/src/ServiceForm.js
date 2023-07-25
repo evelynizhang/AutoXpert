@@ -40,6 +40,7 @@ function ServiceForm() {
     };
 
     const response = await fetch(serviceUrl, fetchConfig);
+    console.log(response)
     if (response.ok) {
       setFormData({
         vin: '',

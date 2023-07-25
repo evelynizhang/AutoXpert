@@ -14,10 +14,11 @@ function TechnicianList() {
       console.log(data.technicians)
     }
   }
+
   useEffect(() => {
     getData()
   }, [])
-
+  console.log(technicians)
 
   return (
     <React.Fragment>

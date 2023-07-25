@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
 
-function VinList(){
-  const [vins, setVins] = useState([])
+function VinList(prop){
+  const[vins, setVins] = useState([])
 
   const getData = async () => {
     const url = 'http://localhost:8100/api/automobiles/';
@@ -11,19 +11,18 @@ function VinList(){
     if (response.ok) {
       const data = await response.json();
       console.log(data)
-      setVins(data.autos.vin);
-      console.log(data.autos.vin)
+      setVins(data.autos.map(auto => {return (auto.vin)}))
     }
   }
-
+console.log(vins)
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <table className="table table-striped">
       <thead>
         <tr>
-
           <th>vin</th>
         </tr>
       </thead>

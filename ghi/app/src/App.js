@@ -6,6 +6,9 @@ import TechnicianForm from "./TechnicianForm"
 import ServiceForm from "./ServiceForm"
 import ServiceList from "./ServiceList"
 import VinList from "./VinForm"
+import ManufacturerList from "./ManufacturerList"
+import ManufacturerForm from "./ManufacturerForm"
+
 
 function App() {
   return (
@@ -19,6 +22,12 @@ function App() {
           </Route>
           <Route path="vins">
             <Route index element={<VinList />} />
+          </Route>
+          <Route path="manufacturers">
+            <Route index element={<ManufacturerList />} />
+          </Route>
+          <Route path="manufacturers/create">
+            <Route index element={<ManufacturerForm />} />
           </Route>
           <Route path="technicians/create">
             <Route index element={<TechnicianForm />} />
