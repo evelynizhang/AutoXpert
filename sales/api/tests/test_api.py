@@ -69,6 +69,7 @@ class Tests(TransactionTestCase):
 
         client = Client()
         response = client.delete(f"/api/customers/{customer.id}/")
+        print("status code: ", response.status_code)
         self.assertEqual(response.status_code, 200, msg="Did not get a 200 OK for customer delete.")
 
         response = client.delete(f"/api/customers/{customer.id}/")
