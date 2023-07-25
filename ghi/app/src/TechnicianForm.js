@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 
-
 function TechnicianForm() {
   const [formData, setFormData] = useState({
     first_name: '',

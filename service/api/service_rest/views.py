@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from .models import AutomobileVO, Appointment,Technician
 from common.json import ModelEncoder
 import datetime
-from datetime import time
+
 
 
 class TechnicianEncoder(ModelEncoder):
@@ -29,12 +29,14 @@ class AutomobileVOEncoder(ModelEncoder):
 
 class AppointmentEncoder(ModelEncoder):
    model = Appointment
-   properties = ["date_time", "reason", "date", "status", "vin", "customer", "technician", "id"]
+   properties = ["date_time", "reason", "date","time","status", "vin", "customer", "technician", "id"]
    encoders={
       "technician": TechnicianDetailEncoder(),
    }
-   def get_extra_data(self, o):
-        return {"time": o.date_time.date()}
+  #  def get_extra_data(self, o):
+  #       return {"time": o.time().isoformat()}
+
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):

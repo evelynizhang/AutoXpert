@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 
+
 function ServiceForm() {
   const [technicians, setTechnicians] = useState([])
   const [formData, setFormData] = useState({
     vin: '',
     customer: '',
-    date: '',
-    time: '',
+    date:'',
+    time:'',
     technician:'',
     reason:'',
   })
@@ -32,16 +33,16 @@ function ServiceForm() {
     const serviceUrl = 'http://localhost:8080/api/appointments/'
 
     const fetchConfig = {
-      method: "post",
+      method: "POST",
       body: JSON.stringify(formData),
       headers: {
         'Content-Type': 'application/json',
       },
     };
 
-    const response = await fetch(serviceUrl, fetchConfig);
-    console.log(response)
-    if (response.ok) {
+    const response1 = await fetch(serviceUrl, fetchConfig);
+    console.log(response1)
+    if (response1.ok) {
       setFormData({
         vin: '',
         customer: '',
@@ -80,11 +81,11 @@ function ServiceForm() {
               <label htmlFor="customer">Customer</label>
             </div>
             <div className="form-floating mb-3">
-              <input onChange={handleFormChange} value={formData.date} placeholder="Date" required type="date" name="Date" id="Date" className="form-control" />
+              <input onChange={handleFormChange} value={formData.date} placeholder="Date" required type="date" name="date" id="date" className="form-control" />
               <label htmlFor="Date">Date</label>
             </div>
             <div className="form-floating mb-3">
-              <input onChange={handleFormChange} value={formData.time} placeholder="Time" required type="time" name="Time" id="Time" className="form-control" />
+              <input onChange={handleFormChange} value={formData.time} placeholder="Time" required type="time" name="time" id="time" className="form-control" />
               <label htmlFor="Time">Time</label>
             </div>
             <div className="mb-3">
@@ -92,7 +93,7 @@ function ServiceForm() {
                 <option value="">Choose a technician</option>
                 {technicians.map(technician => {
                   return (
-                    <option key={technician.id} value={technician.id}>{technician.first_name} {technician.last_name}</option>
+                    <option key={technician.id} value={technician.employee_id}>{technician.first_name} {technician.last_name}</option>
                   )
                 })}
               </select>
