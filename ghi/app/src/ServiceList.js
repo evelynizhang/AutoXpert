@@ -11,7 +11,8 @@ function ServiceList() {
 
     if (response.ok) {
       const data = await response.json()
-      setServices(data.appointments)
+      const app = data.appointments.filter(appointment => appointment.status == "Created")
+      setServices(app)
     }
   }
 
@@ -19,7 +20,7 @@ function ServiceList() {
     getData()
   }, [])
 
-
+console.log(services)
 
     const[vins, setVins] = useState([])
 
@@ -49,9 +50,7 @@ function ServiceList() {
       services[i]["vip"] = VIP[i]
     }
 
-   function cancel(service){
-    console.log(service.status)
-   }
+
 
 
   return (
@@ -81,7 +80,7 @@ function ServiceList() {
                 <td>{ service.technician.employee_id } </td>
                 <td>{ service.reason }</td>
                 <td>
-                <button onClick={cancel}>Cancel</button><button>Finish</button>
+                <button>Cancel</button><button>Finish</button>
                 </td>
               </tr>
             );

@@ -8,6 +8,7 @@ import ServiceList from "./ServiceList"
 import VinList from "./VinForm"
 import ManufacturerList from "./ManufacturerList"
 import ManufacturerForm from "./ManufacturerForm"
+import ServiceHistoryList from "./ServiceHistory"
 
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path="appointments">
             <Route index element={<ServiceList />} />
+          </Route>
+          <Route path="appointments/history">
+            <Route index element={<ServiceHistoryList />} />
           </Route>
         </Routes>
       </div>
