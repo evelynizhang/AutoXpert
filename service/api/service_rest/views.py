@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from .models import AutomobileVO, Appointment,Technician
 from common.json import ModelEncoder
 import datetime
-from datetime import time
+
 
 
 class TechnicianEncoder(ModelEncoder):
@@ -29,12 +29,14 @@ class AutomobileVOEncoder(ModelEncoder):
 
 class AppointmentEncoder(ModelEncoder):
    model = Appointment
-   properties = ["date_time", "reason", "date", "status", "vin", "customer", "technician", "id"]
+   properties = ["date_time", "reason", "date","time","status", "vin", "customer", "technician", "id"]
    encoders={
       "technician": TechnicianDetailEncoder(),
    }
-   def get_extra_data(self, o):
-        return {"time": o.date_time.date()}
+  #  def get_extra_data(self, o):
+  #       return {"time": o.time().isoformat()}
+
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):
@@ -49,14 +51,32 @@ def api_list_technicians(request):
        except:
           return JsonResponse({"message": "Invalid input"}, status=400)
 
-@require_http_methods(["DELETE"])
+
+@require_http_methods(["DELETE","GET","PUT"])
 def api_show_technician(request, pk):
-   if request.method == "DELETE":
-      count, _ = Technician.objects.filter(id=pk).delete()
-      if count > 0:
-        return JsonResponse({"delete": count > 0})
-      else:
-        return JsonResponse({"message": "Invalid techician id"}, status=400)
+    if request.method == "DELETE":
+        count, _ = Technician.objects.filter(id=pk).delete()
+        if count > 0:
+          return JsonResponse({"delete": count > 0})
+        else:
+          return JsonResponse({"message": "Invalid techician id"}, status=400)
+    elif request.method == "GET":
+       try:
+        technician = Technician.objects.get(id=pk)
+        return JsonResponse({"technicians": technician},encoder=TechnicianDetailEncoder,safe=False)
+       except Technician.DoesNotExist:
+          return JsonResponse({"message":"invaild technician id"})
+    else:
+       content = json.loads(request.body)
+       Technician.objects.filter(id=pk).update(**content)
+       try:
+        technician=Technician.objects.get(id=pk)
+        return JsonResponse({"technicians": technician}, encoder=TechnicianEncoder,safe=False)
+       except Technician.DoesNotExist:
+          return JsonResponse({"message":"invaild technician id"})
+
+
+
 
 
 @require_http_methods(["GET", "POST"])
@@ -76,7 +96,7 @@ def api_list_appointments(request):
       return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
 
 
-@require_http_methods(["DELETE"])
+@require_http_methods(["DELETE","GET","PUT"])
 def api_show_appointment(request, pk):
    if request.method == "DELETE":
       count, _ = Appointment.objects.filter(id=pk).delete()
@@ -84,6 +104,28 @@ def api_show_appointment(request, pk):
         return JsonResponse({"delete": count > 0})
       else:
         return JsonResponse({"message": "Invalid appointment id"}, status=400)
+   elif request.method == "GET":
+      try:
+          appointment = Appointment.objects.get(id=pk)
+          return JsonResponse({"appointments": appointment}, encoder=AppointmentEncoder,safe=False)
+      except Appointment.DoesNotExist:
+          return JsonResponse({"message": "invaild appointment id"}, status=400)
+   else:
+      content = json.loads(request.body)
+      try:
+        if "technician" in content:
+          technician = Technician.objects.get(employee_id=content["technician"])
+          content["technician"] = technician
+      except Technician.DoesNotExist:
+         return JsonResponse(
+                {"message": "invaild technician employee_id"}, status=400
+            )
+      Appointment.objects.filter(id=pk).update(**content)
+      appointment=Appointment.objects.get(id=pk)
+      return JsonResponse({"appointments":appointment}, encoder=AppointmentEncoder, safe=False)
+
+
+
 
 @require_http_methods(["GET"])
 def api_list_automobilesVO(request):
@@ -92,13 +134,16 @@ def api_list_automobilesVO(request):
       return JsonResponse({"auto": automobiles}, encoder=AutomobileVOEncoder, safe=False)
 
 
+
 @require_http_methods(["PUT"])
 def api_status_canceled(request, pk):
     if request.method == "PUT":
        appointment = Appointment.objects.get(id=pk)
        appointment.status = "canceled"
        appointment.save()
-       return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
+       return JsonResponse({"appointments": appointment}, encoder=AppointmentEncoder, safe=False)
+
+
 
 @require_http_methods(["PUT"])
 def api_status_finished(request, pk):
@@ -106,4 +151,4 @@ def api_status_finished(request, pk):
        appointment = Appointment.objects.get(id=pk)
        appointment.status = "finished"
        appointment.save()
-       return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
+       return JsonResponse({"appointments": appointment}, encoder=AppointmentEncoder, safe=False)

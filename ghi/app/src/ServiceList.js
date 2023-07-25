@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 
 function ServiceList() {
   const[services, setServices] = useState([])
+  const[service, setService] = useState([])
 
   const getData = async () => {
     const url = "http://localhost:8080/api/appointments/";
@@ -10,7 +11,8 @@ function ServiceList() {
 
     if (response.ok) {
       const data = await response.json()
-      setServices(data.appointments)
+      const app = data.appointments.filter(appointment => appointment.status == "Created")
+      setServices(app)
     }
   }
 
@@ -18,7 +20,7 @@ function ServiceList() {
     getData()
   }, [])
 
-
+console.log(services)
 
     const[vins, setVins] = useState([])
 
@@ -31,17 +33,25 @@ function ServiceList() {
         setVins(data.autos.map(auto => {return (auto.vin)}))
       }
     }
-console.log(vins)
     useEffect(() => {
       getVins();
     }, []);
 
+    const VIP = []
+    for (let service of services) {
+      if (vins.includes(service.vin)){
+      VIP.push("Yes")}
+      else {
+        VIP.push("No")
+      }
+    }
 
-  // function Finish(id) {
-  //   const service = services.filter(service => service.id === id)
-  //   service.status = "finish"
-  //   setService(service)
-  // }
+    for (let i = 0; i < services.length;i++){
+      services[i]["vip"] = VIP[i]
+    }
+
+
+
 
   return (
     <React.Fragment>
@@ -53,7 +63,7 @@ console.log(vins)
             <th>Is VIP?</th>
             <th>Customer</th>
             <th>Date</th>
-            {/* <th>Time</th> */}
+            <th>Time</th>
             <th>Technician</th>
             <th>Reason</th>
           </tr>
@@ -63,14 +73,14 @@ console.log(vins)
             return (
               <tr key={service.id}>
                 <td>{ service.vin }</td>
-                <td>{ vins.includes(service.vin) }</td>
+                <td>{ service.vip}</td>
                 <td>{ service.customer }</td>
                 <td>{ service.date }</td>
-                {/* <td>{ service.time }</td> */}
+                <td>{ service.time }</td>
                 <td>{ service.technician.employee_id } </td>
                 <td>{ service.reason }</td>
                 <td>
-                  <button>Cancel</button><button>Finish</button>
+                <button>Cancel</button><button>Finish</button>
                 </td>
               </tr>
             );

@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime, date
 
 
 # Create your models here.
@@ -17,8 +18,8 @@ class AutomobileVO(models.Model):
 
 class Appointment(models.Model):
     date_time = models.DateTimeField(auto_now_add=True)
-    date = models.DateField(auto_now=True, auto_now_add=False, null=True)
-    time = models.TimeField(auto_now=True, auto_now_add=False,null=True)
+    date = models.DateField(auto_now=False, auto_now_add=True, null=True)
+    time = models.CharField(max_length=200, null=True)
     reason = models.CharField(max_length=200)
     status = models.CharField(max_length=200, default="Created")
     vin = models.CharField(max_length=200)
@@ -29,7 +30,7 @@ class Appointment(models.Model):
         on_delete=models.CASCADE,
     )
     # def get_date(self):
-    #     return self.date_time.date()
+    #     return self.date_time.strftime("%m/%d/%Y")
 
     # def get_time(self):
     #     return self.date_time.time()
