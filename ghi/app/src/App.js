@@ -10,6 +10,9 @@ import ManufacturerList from "./ManufacturerList"
 import ManufacturerForm from "./ManufacturerForm"
 import ServiceHistoryList from "./ServiceHistory"
 import VehicleList from "./VehicleList"
+import VehicleForm from './VehiclesForm';
+import AutomobileList from './AutomobileList';
+import AutomobileForm from './AutomobileForm';
 import SalespeopleList from './SalespeopleList';
 import SalespersonForm from './SalespersonForm';
 import CustomerList from './CustomersList';
@@ -33,6 +36,11 @@ function App() {
           </Route>
           <Route path="models">
             <Route index element={<VehicleList />} />
+            <Route path='new' element={<VehicleForm />} />
+          </Route>
+          <Route path="automobiles">
+            <Route index element={<AutomobileList />} />
+            <Route path='new' element={<AutomobileForm />} />
           </Route>
           <Route path="manufacturers">
             <Route index element={<ManufacturerList />} />
