@@ -11,7 +11,7 @@ function ServiceList() {
 
     if (response.ok) {
       const data = await response.json()
-      const app = data.appointments.filter(appointment => appointment.status == "Created")
+      const app = data.appointments.filter(appointment => appointment.status === "Created")
       setServices(app)
     }
   }
@@ -20,7 +20,7 @@ function ServiceList() {
     getData()
   }, [])
 
-console.log(services)
+
 
     const[vins, setVins] = useState([])
 
@@ -51,6 +51,45 @@ console.log(services)
     }
 
 
+    const handleCencel = async event => {
+      const serviceid = event.target.value
+      console.log(serviceid)
+      // console.log(services)
+      // const filterService = services.filter(app => app.id == serviceid)
+      // console.log(filterService)
+      // filterService[0].status = "Canceled"
+      // setServices(filterService)
+      const url = "http://localhost:8080/api/appointments/${serviceid}/cancel/"
+
+      const fetchConfig = {
+        method : "PUT",
+        body : JSON.stringify({'status': "Canceled"}),
+        headers : {
+            "Content-Type" : 'application/json',
+        }
+    }
+    const response = await fetch(url, fetchConfig)
+    if (response.ok){
+      setServices(response.json())
+    }
+    }
+
+    // const submitHandler = async event => {
+    //   const url = "http://localhost:8080/api/appointments/${serviceid}/cancel/"
+
+    //   const fetchConfig = {
+    //     method : "PUT",
+    //     body : JSON.stringify({'status': "Canceled"}),
+    //     headers : {
+    //         "Content-Type" : 'application/json',
+    //     }
+    // }
+    // const response = await fetch(url, fetchConfig);
+    // if (response.ok){
+
+    // }
+
+
 
 
   return (
@@ -71,7 +110,7 @@ console.log(services)
         <tbody>
           {services.map(service => {
             return (
-              <tr key={service.id}>
+              <tr key={service.id} >
                 <td>{ service.vin }</td>
                 <td>{ service.vip}</td>
                 <td>{ service.customer }</td>
@@ -80,7 +119,7 @@ console.log(services)
                 <td>{ service.technician.employee_id } </td>
                 <td>{ service.reason }</td>
                 <td>
-                <button>Cancel</button><button>Finish</button>
+                <button onClick={handleCencel} value={service.id} >Cancel</button><button>Finish</button>
                 </td>
               </tr>
             );

@@ -2,18 +2,17 @@ import React, { useState, useEffect } from "react";
 
 
 function VehicleList() {
-  const[automobiles, setAutomobiles] = useState([])
+  const[models, setModels] = useState([])
 
   const getData = async () => {
-    const url = "http://localhost:8100/api/automobiles/";
+    const url = "http://localhost:8100/api/models/";
     const response = await fetch(url)
 
     if (response.ok) {
       const data = await response.json()
-      setAutomobiles(data.autos)
+      setModels(data.models)
     }
   }
-  console.log(automobiles)
 
   useEffect(() => {
     getData()
@@ -31,12 +30,12 @@ function VehicleList() {
           </tr>
         </thead>
         <tbody>
-          {automobiles.map(automobile => {
+          {models.map(model => {
             return (
-              <tr key={automobile.href}>
-                <td>{ automobile.model.name}</td>
-                <td>{ automobile.model.manufacturer.name }</td>
-                <td><img src={ automobile.model.picture_url} className="card-img-top" alt="shoe" width="10" height="200" /></td>
+              <tr key={model.href}>
+                <td>{ model.name}</td>
+                <td>{ model.manufacturer.name }</td>
+                <td><img src={ model.picture_url} className="card-img-top" alt="shoe" width="10" height="200" /></td>
               </tr>
             );
           })}

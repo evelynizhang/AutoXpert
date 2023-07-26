@@ -38,6 +38,7 @@ const SalespersonHistory = () => {
 
     const handleSalespersonChange = event => {
         const salespersonId = event.target.value;
+        console.log(salespersonId)
         let filteredSales = sales.filter(sale => sale.salesperson.id == salespersonId);
         setFilteredSales(filteredSales);
     }

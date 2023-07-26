@@ -93,7 +93,7 @@ def api_list_appointments(request):
       except Technician.DoesNotExist:
           return JsonResponse({"message": "Invalid technician employee id"}, status=400)
       appointment = Appointment.objects.create(**content)
-      return JsonResponse(appointment, encoder=AppointmentEncoder, safe=False)
+      return JsonResponse({"appointment": appointment}, encoder=AppointmentEncoder, safe=False)
 
 
 @require_http_methods(["DELETE","GET","PUT"])

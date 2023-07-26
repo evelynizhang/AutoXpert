@@ -4,9 +4,10 @@ import React, { useState, useEffect } from "react";
 function ServiceHistoryList() {
   const[services, setServices] = useState([])
   const[service, setService] = useState([])
-  const [searchInput, setSearchInput] = useState("");
+  const[vins, setVins] = useState([])
 
-  const getData = async () => {
+
+  const getServices = async () => {
     const url = "http://localhost:8080/api/appointments/";
     const response = await fetch(url)
 
@@ -17,12 +18,9 @@ function ServiceHistoryList() {
   }
 
   useEffect(() => {
-    getData()
+    getServices()
   }, [])
 
-console.log(services)
-
-    const[vins, setVins] = useState([])
 
     const getVins = async () => {
       const url = 'http://localhost:8100/api/automobiles/';
@@ -37,6 +35,7 @@ console.log(services)
       getVins();
     }, []);
 
+
     const VIP = []
     for (let service of services) {
       if (vins.includes(service.vin)){
@@ -50,24 +49,16 @@ console.log(services)
       services[i]["vip"] = VIP[i]
     }
 
-
-    const searchBar = () => {}
-    const handleChange = (e) => {
-      e.preventDefault();
-      setSearchInput(e.target.value);
-    };
-
-    if (searchInput.length > 0) {
-        vins.filter((vin) => {
-        return vin.match(searchInput);
-    });
+    const handleCencel = event => {
+      const serviceId = event.target.id
+      let service = services.filter(app => app.id = serviceId)
+      console.log(service)
+      setService(service)
     }
-
 
   return (
     <React.Fragment>
       <h1>Service History</h1>
-      <input type="text" placeholder="Search here" onChange={handleChange} value={searchInput}/>
       <table className="table table-striped" >
         <thead>
           <tr>
