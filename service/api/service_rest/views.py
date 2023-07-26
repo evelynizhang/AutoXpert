@@ -69,7 +69,7 @@ def api_show_technician(request, pk):
         technician = Technician.objects.get(id=pk)
         return JsonResponse({"technicians": technician},encoder=TechnicianDetailEncoder,safe=False)
        except Technician.DoesNotExist:
-          return JsonResponse({"message":"invaild technician id"})
+          return JsonResponse({"message":"invaild technician id"}, status=400)
     else:
        content = json.loads(request.body)
        Technician.objects.filter(id=pk).update(**content)
@@ -77,7 +77,7 @@ def api_show_technician(request, pk):
         technician=Technician.objects.get(id=pk)
         return JsonResponse({"technicians": technician}, encoder=TechnicianEncoder,safe=False)
        except Technician.DoesNotExist:
-          return JsonResponse({"message":"invaild technician id"})
+          return JsonResponse({"message":"invaild technician id"}, status=400)
 
 
 
@@ -145,17 +145,23 @@ def api_list_automobilesVO(request):
 @require_http_methods(["PUT"])
 def api_status_canceled(request, pk):
     if request.method == "PUT":
-       appointment = Appointment.objects.get(id=pk)
-       appointment.status = "canceled"
-       appointment.save()
-       return JsonResponse({"appointments": appointment}, encoder=AppointmentEncoder, safe=False)
+      try:
+          appointment = Appointment.objects.get(id=pk)
+          appointment.status = "canceled"
+          appointment.save()
+          return JsonResponse({"appointments": appointment}, encoder=AppointmentEncoder, safe=False)
+      except Appointment.DoesNotExist:
+          return JsonResponse({"message": "invalid appointment id"}, status=400)
 
 
 
 @require_http_methods(["PUT"])
 def api_status_finished(request, pk):
    if request.method == "PUT":
-       appointment = Appointment.objects.get(id=pk)
-       appointment.status = "finished"
-       appointment.save()
-       return JsonResponse({"appointments": appointment}, encoder=AppointmentEncoder, safe=False)
+       try:
+          appointment = Appointment.objects.get(id=pk)
+          appointment.status = "finished"
+          appointment.save()
+          return JsonResponse({"appointments": appointment}, encoder=AppointmentEncoder, safe=False)
+       except Appointment.DoesNotExist:
+          return JsonResponse({"message": "invalid appointment id"}, status=400)

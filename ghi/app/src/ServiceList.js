@@ -51,45 +51,49 @@ function ServiceList() {
     }
 
 
-    const handleCencel = async event => {
-      const serviceid = event.target.value
-      console.log(serviceid)
-      // console.log(services)
-      // const filterService = services.filter(app => app.id == serviceid)
-      // console.log(filterService)
-      // filterService[0].status = "Canceled"
-      // setServices(filterService)
-      const url = "http://localhost:8080/api/appointments/${serviceid}/cancel/"
+    const handleCancel = (serviceId) => {
+      fetch(`http://localhost:8080/api/appointments/${serviceId}/cancel/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: "canceled" }),
+      })
+      .then((response) => {
+        // If the update is successful, update the frontend state accordingly
+        const updatedServices = services.map((service) => {
+          if (service.id === serviceId) {
+            return { ...service, status: "canceled" };
+          }
+          return service;
+        });
 
-      const fetchConfig = {
-        method : "PUT",
-        body : JSON.stringify({'status': "Canceled"}),
-        headers : {
-            "Content-Type" : 'application/json',
-        }
+        setServices(updatedServices);
+        window.location.reload();
+      })
     }
-    const response = await fetch(url, fetchConfig)
-    if (response.ok){
-      setServices(response.json())
+
+    const handleFinish = (serviceId) => {
+      fetch(`http://localhost:8080/api/appointments/${serviceId}/finish/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: "Canceled" }),
+      })
+      .then((response) => {
+        // If the update is successful, update the frontend state accordingly
+        const updatedServices = services.map((service) => {
+          if (service.id === serviceId) {
+            return { ...service, status: "Finished" };
+          }
+          return service;
+        });
+
+        setServices(updatedServices);
+        window.location.reload();
+      })
     }
-    }
-
-    // const submitHandler = async event => {
-    //   const url = "http://localhost:8080/api/appointments/${serviceid}/cancel/"
-
-    //   const fetchConfig = {
-    //     method : "PUT",
-    //     body : JSON.stringify({'status': "Canceled"}),
-    //     headers : {
-    //         "Content-Type" : 'application/json',
-    //     }
-    // }
-    // const response = await fetch(url, fetchConfig);
-    // if (response.ok){
-
-    // }
-
-
 
 
   return (
@@ -119,7 +123,7 @@ function ServiceList() {
                 <td>{ service.technician.employee_id } </td>
                 <td>{ service.reason }</td>
                 <td>
-                <button onClick={handleCencel} value={service.id} >Cancel</button><button>Finish</button>
+                <button onClick={() => handleCancel(service.id)} >Cancel</button><button onClick={() => handleFinish(service.id)}>Finish</button>
                 </td>
               </tr>
             );
