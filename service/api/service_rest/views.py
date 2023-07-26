@@ -41,8 +41,12 @@ class AppointmentEncoder(ModelEncoder):
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):
     if request.method == "GET":
-      technicians = Technician.objects.all()
-      return JsonResponse({"technicians": technicians}, encoder=TechnicianEncoder, safe=False)
+       try:
+          technicians = Technician.objects.all()
+          return JsonResponse({"technicians": technicians}, encoder=TechnicianEncoder, safe=False)
+       except Exception:
+          return JsonResponse(status = 400)
+
     else:
        try:
           content = json.loads(request.body)
@@ -82,8 +86,11 @@ def api_show_technician(request, pk):
 @require_http_methods(["GET", "POST"])
 def api_list_appointments(request):
     if request.method == "GET":
-      appointments = Appointment.objects.all()
-      return JsonResponse({"appointments": appointments}, encoder=AppointmentEncoder, safe=False)
+      try:
+          appointments = Appointment.objects.all()
+          return JsonResponse({"appointments": appointments}, encoder=AppointmentEncoder, safe=False)
+      except Exception:
+          return JsonResponse(status = 400)
     else:
       content = json.loads(request.body)
       try:
