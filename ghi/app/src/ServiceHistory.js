@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 function ServiceHistoryList() {
   const[services, setServices] = useState([])
-  const[service, setService] = useState([])
+  const [searchQuery, setSearchQuery] = useState("");
   const[vins, setVins] = useState([])
 
 
@@ -49,16 +49,19 @@ function ServiceHistoryList() {
       services[i]["vip"] = VIP[i]
     }
 
-    const handleCencel = event => {
-      const serviceId = event.target.id
-      let service = services.filter(app => app.id = serviceId)
-      console.log(service)
-      setService(service)
-    }
+    const filteredServices = services.filter((service) =>
+    service.vin.includes(searchQuery)
+  );
 
   return (
     <React.Fragment>
       <h1>Service History</h1>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search by VIN..."
+      />
       <table className="table table-striped" >
         <thead>
           <tr>
@@ -73,7 +76,7 @@ function ServiceHistoryList() {
           </tr>
         </thead>
         <tbody>
-          {services.map(service => {
+        {filteredServices.map((service) => {
             return (
               <tr key={service.id}>
                 <td>{ service.vin }</td>
