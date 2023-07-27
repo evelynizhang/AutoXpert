@@ -122,7 +122,8 @@ function ServiceList() {
                 <td>{ service.technician.employee_id } </td>
                 <td>{ service.reason }</td>
                 <td>
-                <button onClick={() => handleCancel(service.id)} className="btn btn-success" >Cancel</button><button onClick={() => handleFinish(service.id)} className="btn btn-danger">Finish</button>
+                <button onClick={() => handleCancel(service.id)} className="btn btn-success" >Cancel</button>
+                <button onClick={() => handleFinish(service.id)} className="btn btn-danger">Finish</button>
                 </td>
               </tr>
             );
