@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 function ServiceHistoryList() {
   const[services, setServices] = useState([])
-  const [searchQuery, setSearchQuery] = useState("");
+  const[searchQuery, setSearchQuery] = useState("");
   const[vins, setVins] = useState([])
 
 

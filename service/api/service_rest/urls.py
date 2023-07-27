@@ -1,5 +1,4 @@
 from django.urls import path
-
 from .views import api_list_technicians, api_show_technician, api_list_appointments, api_show_appointment, api_list_automobilesVO, api_status_canceled, api_status_finished
 
 
