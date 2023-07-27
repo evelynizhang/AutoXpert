@@ -18,7 +18,6 @@ function TechnicianList() {
   useEffect(() => {
     getData()
   }, [])
-  console.log(technicians)
 
   return (
     <React.Fragment>
