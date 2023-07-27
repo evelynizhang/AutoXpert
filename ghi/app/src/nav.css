@@ -1,0 +1,7 @@
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: .5em;
+    margin-right: 1em;
+}
