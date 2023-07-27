@@ -1,10 +1,15 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import './nav.css'
+import { NavLink } from 'react-router-dom';
 
 const Nav = () => {
     return (
         <>
         <div className='navbar'>
+        <div>
+            <NavLink className="navbar-brand" to="/">CarCar</NavLink>
+        </div>
+        <div className='navbar-right'>
         <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
             Inventory
@@ -44,6 +49,7 @@ const Nav = () => {
             <Dropdown.Item href="/sales/history">Sales History</Dropdown.Item>
         </Dropdown.Menu>
         </Dropdown>
+        </div>
         </div>
         </>
     )
