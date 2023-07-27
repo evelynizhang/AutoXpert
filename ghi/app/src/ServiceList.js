@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 
 function ServiceList() {
   const[services, setServices] = useState([])
-  const[service, setService] = useState([])
+  const[vins, setVins] = useState([])
+
 
   const getData = async () => {
     const url = "http://localhost:8080/api/appointments/";
@@ -21,9 +22,6 @@ function ServiceList() {
   }, [])
 
 
-
-    const[vins, setVins] = useState([])
-
     const getVins = async () => {
       const url = 'http://localhost:8100/api/automobiles/';
       const response = await fetch(url);
@@ -36,6 +34,7 @@ function ServiceList() {
     useEffect(() => {
       getVins();
     }, []);
+
 
     const VIP = []
     for (let service of services) {
@@ -57,13 +56,13 @@ function ServiceList() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ status: "canceled" }),
+        body: JSON.stringify({ status: "Canceled" }),
       })
       .then((response) => {
         // If the update is successful, update the frontend state accordingly
         const updatedServices = services.map((service) => {
           if (service.id === serviceId) {
-            return { ...service, status: "canceled" };
+            return { ...service, status: "Canceled" };
           }
           return service;
         });
@@ -79,7 +78,7 @@ function ServiceList() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ status: "Canceled" }),
+        body: JSON.stringify({ status: "Finished" }),
       })
       .then((response) => {
         // If the update is successful, update the frontend state accordingly
