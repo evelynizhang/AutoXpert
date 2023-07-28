@@ -1,0 +1,10 @@
+.navbar {
+    margin: 0em 1em;
+
+}
+
+.navbar-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: .5em;
+}
