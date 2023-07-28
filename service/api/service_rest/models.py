@@ -15,7 +15,7 @@ class AutomobileVO(models.Model):
 
 
 class Appointment(models.Model):
-    date = models.DateField(auto_now=False, auto_now_add=True, null=True)
+    date = models.DateField(auto_now=False, auto_now_add=False, null=True)
     time = models.CharField(max_length=200, null=True)
     reason = models.CharField(max_length=200)
     status = models.CharField(max_length=200, default="Created")
