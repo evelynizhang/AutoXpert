@@ -3,17 +3,19 @@ import './nav.css'
 import { NavLink } from 'react-router-dom';
 import Header from './Header';
 
+
 const Nav = () => {
     return (
         <>
         <div className='header-container'>
         <div className='navbar'>
-        <div>
+        <div className='brand'>
+            <img className='icon' src='car-wheel.svg' />
             <NavLink className="navbar-brand" to="/">CarCar</NavLink>
         </div>
         <div className='navbar-right'>
         <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle className='dropdown' variant="success" id="dropdown-basic">
             Inventory
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -26,7 +28,7 @@ const Nav = () => {
         </Dropdown.Menu>
         </Dropdown>
         <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle className='dropdown' variant="success" id="dropdown-basic">
             Service
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -38,7 +40,7 @@ const Nav = () => {
         </Dropdown.Menu>
         </Dropdown>
         <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle className='dropdown' variant="success" id="dropdown-basic">
             Sales
         </Dropdown.Toggle>
         <Dropdown.Menu>

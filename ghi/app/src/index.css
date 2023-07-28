@@ -37,10 +37,6 @@ code {
   margin-left: 1.5em;
 }
 
-.table-container h3 {
-  text-align: center;
-}
-
 .counter-container {
   display: flex;
   flex-direction: column;
@@ -57,4 +53,5 @@ code {
   padding: 1em;
   text-align: center;
   border-radius: 1em;
+
 }

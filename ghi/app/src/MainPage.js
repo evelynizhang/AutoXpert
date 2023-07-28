@@ -113,7 +113,7 @@ const RenderService = () => {
     <>
     <div className='table-container'>
       <h3>Upcoming Service Appointments</h3>
-      <table className='table'>
+      <table className='table table-hover'>
         <thead>
           <tr>
             <th>Customer</th>
@@ -162,11 +162,11 @@ function MainPage() {
         </p>
       </div>
     </div>
-    <div>
-      <GrabAutomobiles />
-    </div>
     <div className='bottom-container'>
       <RenderService />
+    </div>
+    <div>
+      <GrabAutomobiles />
     </div>
     </>
   );
