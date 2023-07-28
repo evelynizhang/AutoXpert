@@ -1,10 +1,12 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import './nav.css'
 import { NavLink } from 'react-router-dom';
+import Header from './Header';
 
 const Nav = () => {
     return (
         <>
+        <div className='header-container'>
         <div className='navbar'>
         <div>
             <NavLink className="navbar-brand" to="/">CarCar</NavLink>
@@ -50,6 +52,8 @@ const Nav = () => {
         </Dropdown.Menu>
         </Dropdown>
         </div>
+        </div>
+        {<Header />}
         </div>
         </>
     )

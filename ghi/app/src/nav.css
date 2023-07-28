@@ -1,10 +1,33 @@
+.header-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 5em;
+}
+
+
 .navbar {
     margin: 0em 1em;
-
 }
 
 .navbar-right {
     display: flex;
     justify-content: flex-end;
     gap: .5em;
+}
+
+.header {
+    height: 30vw;
+    text-align: center;
+    /* background-image: url('https://images.unsplash.com/photo-1554223090-7e482851df45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2603&q=80');
+    background-position-y: 55%; */
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header img {
+    height: inherit;
+    object-fit: cover;
+    border-radius: 2em;
 }
