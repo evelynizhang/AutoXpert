@@ -11,7 +11,6 @@ function TechnicianList() {
     if (response.ok) {
       const data = await response.json()
       setTechnicians(data.technicians)
-      console.log(data.technicians)
     }
   }
 
@@ -19,9 +18,11 @@ function TechnicianList() {
     getData()
   }, [])
 
+
+
   return (
     <React.Fragment>
-      <h1>Technicians</h1>
+      {/* <h1>Technicians</h1>
       <table className="table table-striped" >
         <thead>
           <tr>
@@ -41,7 +42,22 @@ function TechnicianList() {
             );
           })}
         </tbody>
-      </table>
+      </table> */}
+      <h1>Technicians</h1>
+      <div className="row row-cols-1 row-cols-md-3 g-4">
+        <div className="col">
+          {technicians.map(technician => {
+              return (
+          <div key={technician.id} className="card">
+              <img src={technician.picture_url} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">{technician.first_name} {technician.last_name}</h5>
+                <p className="card-text">Add some text later</p>
+              </div>
+          </div>
+              )})}
+        </div>
+      </div>
     </React.Fragment>
   )
 }

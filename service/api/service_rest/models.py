@@ -5,6 +5,7 @@ class Technician(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     employee_id = models.CharField(max_length=200)
+    picture_url = models.URLField(max_length=20000, null=True)
     def full_name(self):
         return self.first_name + self.last_name
 
