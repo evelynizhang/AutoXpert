@@ -20,6 +20,7 @@ import CustomerForm from './CustomerForm';
 import SaleList from './SaleList';
 import SaleForm from './SaleForm';
 import SalespersonHistory from './SalespersonHistory';
+import Footer from './Footer';
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
           </Route>
         </Routes>
       </div>
+      <Footer />
     </BrowserRouter>
   );
 }

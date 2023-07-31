@@ -27,7 +27,7 @@ const GrabAutomobiles = () => {
 
     return (
       <>
-      <div className='container text-center'>
+      <div className='inventory-container container text-center'>
         <h3>Inventory at a glance</h3>
         <div className='row'>
         {automobiles.slice(0,4).map(automobile => {

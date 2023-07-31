@@ -56,6 +56,12 @@
     border-radius: 8px;
 }
 
+.dropdown-item:active {
+    background-color: #ffcb5d;
+    color: rgb(82, 80, 80);
+}
+
+
 .btn-check:active+.btn-success, .btn-check:checked+.btn-success, .btn-success.active, .btn-success:active, .show>.btn-success.dropdown-toggle {
     color:rgb(82, 80, 80);
     background-color:  #ffcb5d;
