@@ -96,3 +96,32 @@ services:
       DATABASE_URL: postgres://sales:password@database:5432/sales
       WAIT_HOSTS: database:5432,sales-api:8000
       WAIT_TIMEOUT: 240
+  customers-api:
+    build:
+      context: ./customers/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8200:8000"
+    volumes:
+      - ./customers/api:/app
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgres://customers:password@database:5432/customers
+      WAIT_HOSTS: database:5432
+      WAIT_TIMEOUT: 240
+  customers-poller:
+    build:
+      context: ./customers/poll
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./customers/poll:/app
+      - ./customers/api/customers_project:/app/customers_project
+      - ./customers/api/customers_rest:/app/customers_rest
+    depends_on:
+      - database
+      - customers-api
+    environment:
+      DATABASE_URL: postgres://customers:password@database:5432/customers
+      WAIT_HOSTS: database:5432,customers-api:8000
+      WAIT_TIMEOUT: 240
