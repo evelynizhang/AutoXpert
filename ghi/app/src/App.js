@@ -22,6 +22,7 @@ import SaleForm from './SaleForm';
 import SalespersonHistory from './SalespersonHistory';
 import Footer from './Footer';
 
+
 function App() {
   return (
     <BrowserRouter>

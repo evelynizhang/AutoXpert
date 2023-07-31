@@ -9,12 +9,12 @@ from common.json import ModelEncoder
 
 class TechnicianEncoder(ModelEncoder):
    model = Technician
-   properties = ["first_name", "last_name", "employee_id","id"]
+   properties = ["first_name", "last_name", "employee_id","id","picture_url"]
 
 
 class TechnicianDetailEncoder(ModelEncoder):
    model = Technician
-   properties = ["employee_id"]
+   properties = ["employee_id","first_name", "last_name","id","picture_url"]
 
 
 class AutomobileVOEncoder(ModelEncoder):
