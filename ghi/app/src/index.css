@@ -11,3 +11,68 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.automobile-img {
+  width: 100%;
+  height: 70%;
+  border-radius: .5em .5em 0em 0em;
+  object-fit: cover;
+  filter: saturate(0.7);
+}
+
+.text-center h3 {
+  text-align: left;
+  margin-left: 1em;
+}
+
+.bottom-container {
+  display: flex;
+}
+
+.table-container {
+  width: 70%;
+  margin-left: 1.5em;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #ffcb5d50;
+}
+
+
+.counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  gap: 2em;
+  margin: 3em 0em 3em 4em;
+}
+
+.counter-container div {
+  background-color: #44515c90;
+  height: 50%;
+  width: 70%;
+  padding: 1.0em;
+  text-align: center;
+  border-radius: 1em;
+
+}
+
+.inventory-container {
+  background-image: url('../public/shapes.png');
+  background-position-y: 25%;
+  padding-bottom: 3em;
+}
+
+.inventory-container p {
+  background-color: #9ca1a7;
+  border-radius: 0em 0em .5em .5em;
+  padding: .5em 0em;
+}
+
+.footer {
+  background-color: #44515c;
+  margin-bottom: -2em;
+  height: 5vw;
+}

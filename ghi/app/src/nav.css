@@ -1,10 +1,69 @@
+.header-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 5em;
+}
+
+
 .navbar {
     margin: 0em 1em;
+}
 
+.brand {
+    display: flex;
+    gap: .5em;
+}
+
+.navbar-brand {
+    font-size: 1.5em;
+    color: rgb(70, 68, 68);
+}
+
+.icon {
+    width: 2.5em;
 }
 
 .navbar-right {
     display: flex;
     justify-content: flex-end;
     gap: .5em;
+}
+
+.header {
+    height: 30vw;
+    text-align: center;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header img {
+    height: inherit;
+    object-fit: cover;
+    border-radius: 2em;
+}
+
+.dropdown {
+    background-color: white;
+    color: rgb(82, 80, 80);
+    border: none;
+}
+.dropdown:hover {
+    background-color: #ffcb5d;
+    border: none;
+    color: rgb(82, 80, 80);
+    border-radius: 8px;
+}
+
+.dropdown-item:active {
+    background-color: #ffcb5d;
+    color: rgb(82, 80, 80);
+}
+
+
+.btn-check:active+.btn-success, .btn-check:checked+.btn-success, .btn-success.active, .btn-success:active, .show>.btn-success.dropdown-toggle {
+    color:rgb(82, 80, 80);
+    background-color:  #ffcb5d;
+    border: none;
 }

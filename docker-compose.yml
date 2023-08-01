@@ -125,3 +125,17 @@ services:
       DATABASE_URL: postgres://customers:password@database:5432/customers
       WAIT_HOSTS: database:5432,customers-api:8000
       WAIT_TIMEOUT: 240
+  accounts-api:
+    build:
+      context: ./accounts/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8070:8000"
+    volumes:
+      - ./accounts/api:/app
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgres://accounts:password@database:5432/accounts
+      WAIT_HOSTS: database:5432
+      WAIT_TIMEOUT: 240
