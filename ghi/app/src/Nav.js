@@ -1,13 +1,11 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import './nav.css'
 import { NavLink } from 'react-router-dom';
-import Heart from "react-animated-heart";
 import {useState} from "react"
 
 
 
 const Nav = () => {
-  const [isClick, setClick] = useState(false);
     return (
         <>
         <div className='navbar'>
@@ -54,9 +52,6 @@ const Nav = () => {
             <Dropdown.Item href="/sales/history">Sales History</Dropdown.Item>
         </Dropdown.Menu>
         </Dropdown>
-        <div className="App">
-      <Heart isClick={isClick} onClick={() => setClick(!isClick)} />
-    </div>
         </div>
         </div>
         </>
