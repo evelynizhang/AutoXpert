@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { BsHeart } from "react-icons/bs";
+import Heart from "react-animated-heart";
+
+function Hearticon() {
+  const [isClick, setClick] = useState(false);
+  return (
+    <div className="Hearticon">
+      <Heart isClick={isClick} onClick={() => setClick(!isClick)} />
+    </div>
+  );
+}
 
 
 function TechnicianColumn(props) {
-    const handleHeart = (technicianId) => {
-  }
+	const [active, setActive] = useState(false)
+
   return (
     <div className="col">
       {props.list.map(data => {
@@ -12,12 +21,10 @@ function TechnicianColumn(props) {
         return (
           <div key={technician.id} className="card mb-3 h-50" >
             <img src={technician.picture_url} className="card-img-top" alt="..." height="300" />
+
             <div className="card-body">
-              <h5 className="card-title">{technician.first_name} {technician.last_name}</h5>
-              <p className="card-text">
-                add some text laster
-              </p>
-              <button onClick={() => handleHeart(technician.id)}><BsHeart/></button>
+              <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
+              <Hearticon />
 
             </div>
           </div>
@@ -30,6 +37,7 @@ function TechnicianColumn(props) {
 
 function TechnicianList(props) {
   const [technicianColumns, setTechnicianColumns] = useState([[], [], []]);
+
 
   const fetchData = async () => {
     const url = 'http://localhost:8080/api/technicians/';
