@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Heart from "react-animated-heart";
 
-function Hearticon() {
+
+
+function HeartIcon() {
   const [isClick, setClick] = useState(false);
   return (
     <div className="Hearticon">
@@ -12,7 +14,6 @@ function Hearticon() {
 
 
 function TechnicianColumn(props) {
-	const [active, setActive] = useState(false)
 
   return (
     <div className="col">
@@ -24,8 +25,7 @@ function TechnicianColumn(props) {
 
             <div className="card-body">
               <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
-              <Hearticon />
-
+              <HeartIcon />
             </div>
           </div>
         );

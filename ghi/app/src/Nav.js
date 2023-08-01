@@ -32,6 +32,7 @@ const Nav = () => {
         </Dropdown.Toggle>
         <Dropdown.Menu>
             <Dropdown.Item href="/technicians/">Technicians</Dropdown.Item>
+            <Dropdown.Item href="/technicians/favorite">Favorite Technicians</Dropdown.Item>
             <Dropdown.Item href="/technicians/create">Add a Technician</Dropdown.Item>
             <Dropdown.Item href="/appointments/">Appointments</Dropdown.Item>
             <Dropdown.Item href="/appointments/create">Add an Appointment</Dropdown.Item>
