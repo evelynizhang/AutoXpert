@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Heart from "react-animated-heart";
-import "./HeartButton.css"
+
+function Hearticon() {
+  const [isClick, setClick] = useState(false);
+  return (
+    <div className="Hearticon">
+      <Heart isClick={isClick} onClick={() => setClick(!isClick)} />
+    </div>
+  );
+}
 
 
 function TechnicianColumn(props) {
-  const [isClick, setClick] = useState(false);
+	const [active, setActive] = useState(false)
 
   return (
     <div className="col">
@@ -16,10 +24,8 @@ function TechnicianColumn(props) {
 
             <div className="card-body">
               <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
-              <Heart className="heart" isClick={isClick} onClick={() => setClick(!isClick)} />
-              {/* <p className="card-text">
-                add some text laster
-              </p> */}
+              <Hearticon />
+
             </div>
           </div>
         );
