@@ -8,3 +8,11 @@
     justify-content: flex-end;
     gap: .5em;
 }
+
+.drops {
+    align-content: center;
+}
+
+#dropdown-basic {
+    margin-top: 35px;
+}
