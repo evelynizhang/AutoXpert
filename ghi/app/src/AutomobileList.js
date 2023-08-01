@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react';
+import Card from 'react-bootstrap/Card';
+import './index.css'
 
 const AutomobileList = () => {
-    const[automobiles, setAutomobiles] = useState([]);
+    const[soldCars, setSoldCars] = useState([]);
+    const[unsoldCars, setUnsoldCars] = useState([]);
 
     const fetchAutomobiles = async () => {
         const automobilesUrl = 'http://localhost:8100/api/automobiles/';
@@ -11,7 +14,10 @@ const AutomobileList = () => {
                 throw new Error
             } else {
                 const data = await response.json();
-                setAutomobiles(data.autos)
+                const sold = data.autos.filter(auto => (auto.sold === true));
+                const unsold = data.autos.filter(auto => (auto.sold === false));
+                setSoldCars(sold);
+                setUnsoldCars(unsold);
             }
         } catch(e) {
             console.log(e, "There was a problem fetching automobiles")
@@ -22,37 +28,91 @@ const AutomobileList = () => {
         fetchAutomobiles();
     },[]);
 
-    return (
-        <div>
-            <h1>Automobiles</h1>
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                    <th scope="col">VIN</th>
-                    <th scope="col">Color</th>
-                    <th scope="col">Year</th>
-                    <th scope="col">Model</th>
-                    <th scope="col">Manufacturer</th>
-                    <th scope="col">Sold</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {automobiles.map(automobile => {
-                        return (
-                            <tr key={automobile.vin}>
-                                <td>{automobile.vin}</td>
-                                <td>{automobile.color}</td>
-                                <td>{automobile.year}</td>
-                                <td>{automobile.model.name}</td>
-                                <td>{automobile.model.manufacturer.name}</td>
-                                <td>{automobile.sold ? 'Yes' : 'No'}</td>
-                            </tr>
+    const col1 = []
+    const col2 = []
+    const col3 = []
+    const col4 = []
+    let col = 0;
+    for (const car of unsoldCars) {
+        if (col === 0) {
+            col1.push(car);
+            col += 1;
+        }
+        else if (col === 1) {
+            col2.push(car);
+            col += 1;
+        }
+        else {
+            col3.push(car);
+            col = 0;
+        }
+    }
 
-                        )
-                    })}
-                </tbody>
-        </table>
+    return (
+        <>
+        <div className='vehicle-container'>
+        <div className='container'>
+            <h1>Unsold Automobiles</h1>
+            <div className='row sold'>
+            <div className='col '>
+            {col1.map(automobile => {
+            return (
+                <Card style={{ width: '25rem' }}>
+                    <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
+                    <Card.Body>
+                        <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
+                        <Card.Text>
+                        Extra information or short description regarding automobile.
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
+                </Card>
+            )
+            })}
+            </div>
+            <div className='col'>
+
+            {col2.map(automobile => {
+            return (
+                <Card style={{ width: '25rem' }}>
+                    <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
+                    <Card.Body>
+                        <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
+                        <Card.Text>
+                        Extra information or short description regarding automobile.
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
+                </Card>
+            )
+            })}
+            </div>
+            <div className='col'>
+            {col3.map(automobile => {
+            return (
+                <Card style={{ width: '25rem' }}>
+                    <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
+                    <Card.Body>
+                        <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
+                        <Card.Text>
+                        Extra information or short description regarding automobile.
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
+                </Card>
+            )
+            })}
+            </div>
+            </div>
         </div>
+        <div className='container'>
+            <h1>Sold Vehicles</h1>
+        </div>
+        </div>
+        </>
     );
 }
 
