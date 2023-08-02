@@ -33,6 +33,9 @@ class AutomobileEncoder(ModelEncoder):
         "vin",
         "model",
         "sold",
+        "type",
+        "mileage",
+        "dealer_price"
     ]
     encoders = {
         "model": VehicleModelEncoder(),
