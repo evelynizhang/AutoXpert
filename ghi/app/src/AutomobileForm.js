@@ -6,6 +6,9 @@ const AutomobileForm = () => {
         color: "",
         year: "",
         vin: "",
+        type: "",
+        mileage: "",
+        dealer_price: "",
         model_id: "",
     })
 
@@ -57,6 +60,9 @@ const AutomobileForm = () => {
                 color: "",
                 year: "",
                 vin: "",
+                type: "",
+                mileage: "",
+                dealer_price: "",
                 model_id: "",
             });
         };
@@ -76,6 +82,19 @@ const AutomobileForm = () => {
                     </div>
                     <div className="mb-3">
                         <input onChange={handleFormChange} value={formData.vin}placeholder="VIN..." required type="text" name="vin" id="vin" className="form-control"/>
+                    </div>
+                    <div className="mb-3">
+                        <select onChange={handleFormChange} value={formData.type} required name="type" id="type" className="form-select">
+                            <option value="">Choose Car Condition...</option>
+                            <option value="new">New</option>
+                            <option value="used">Used</option>
+                        </select>
+                    </div>
+                    <div className="mb-3">
+                        <input onChange={handleFormChange} value={formData.mileage} placeholder="Miles..." required type="number" name="mileage" id="mileage" className="form-control"/>
+                    </div>
+                    <div className="mb-3">
+                        <input onChange={handleFormChange} value={formData.dealer_price} placeholder="Price..." required type="dealer_price" name="dealer_price" id="dealer_price" className="form-control"/>
                     </div>
                     <div className="mb-3">
                         <select onChange={handleFormChange} value={formData.model_id} required name="model_id" id="model_id" className="form-select">
