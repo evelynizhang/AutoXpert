@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Heart from "react-animated-heart";
+import React, {useEffect, useState} from "react";
+import HeartIcon from "./heart"
 
-function HeartIcon () {
-  const[isClick, setClick] = useState(false);
+
+function FavCard(props) {
   const[favorite, setFavorite] = useState([])
-  const[technicians, setTechnicians] = useState([])
 
-  const getFav = async () => {
+  const getData = async () => {
     const url = "http://localhost:8080/api/technicians/favorite/";
     const response = await fetch(url)
 
@@ -16,21 +15,11 @@ function HeartIcon () {
       setFavorite(app)
     }
   }
-  const getTechnicians = async () => {
-    const url = "http://localhost:8080/api/technicians/";
-    const response = await fetch(url)
-
-    if (response.ok) {
-      const data = await response.json()
-      const app = data.technicians
-      setTechnicians(app)
-    }
-  }
 
   useEffect(() => {
-    getFav()
-    getTechnicians()
+    getData()
   }, [])
+
 
   const handleFavorite = (technicianId) => {
     fetch(`http://localhost:8080/api/technicians/${technicianId}/favorite/`,{
@@ -54,13 +43,22 @@ function HeartIcon () {
   }
 
   return (
-    <div className="App">
-     <Heart isClick={isClick} onClick={() => {
-        setClick(!isClick);
-        handleFavorite()
-        } } />
+    <div className="col">
+      {props.list.map(data => {
+        const technician = data.technicians;
+        return (
+          <div key={technician.id} className="card mb-3 h-50" >
+            <img src={technician.picture_url} className="card-img-top" alt="..." height="300" />
+
+            <div className="card-body">
+              <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
+              <HeartIcon onClick={() => handleFavorite(technician.id)}/>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
-export default HeartIcon;
+export default FavCard;

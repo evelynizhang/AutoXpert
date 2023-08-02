@@ -3,12 +3,12 @@ import TechnicianCard from "./TechnicianCard"
 
 
 
-function TechnicianList(props) {
+function FavoriteTechnicians(props) {
   const [technicianColumns, setTechnicianColumns] = useState([[], [], []]);
 
 
   const fetchData = async () => {
-    const url = 'http://localhost:8080/api/technicians/';
+    const url = 'http://localhost:8080/api/technicians/favorite/';
 
     try {
       const response = await fetch(url);
@@ -74,4 +74,4 @@ function TechnicianList(props) {
   )
 }
 
-export default TechnicianList;
+export default FavoriteTechnicians;

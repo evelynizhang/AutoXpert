@@ -21,6 +21,7 @@ import SaleList from './SaleList';
 import SaleForm from './SaleForm';
 import SalespersonHistory from './SalespersonHistory';
 import Footer from './Footer';
+import FavoriteTechnicians from "./FavTechnician"
 
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route path="technicians/create">
             <Route index element={<TechnicianForm />} />
+          </Route>
+          <Route path="technicians/favorite">
+            <Route index element={<FavoriteTechnicians />} />
           </Route>
           <Route path="appointments/create">
             <Route index element={<ServiceForm />} />

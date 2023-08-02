@@ -6,6 +6,7 @@ class Technician(models.Model):
     last_name = models.CharField(max_length=200)
     employee_id = models.CharField(max_length=200)
     picture_url = models.URLField(max_length=20000, null=True)
+    is_favorite = models.BooleanField(default=False, null=True)
     def full_name(self):
         return self.first_name + self.last_name
 
