@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Heart from "react-animated-heart";
+import './index.css'
 
 function HeartWrapper(props) {
 	const [active, setActive] = useState(props.automobile.is_favorite);
@@ -39,4 +40,4 @@ function HeartWrapper(props) {
 
 }
 
-export default HeartWrapper
+export default HeartWrapper;

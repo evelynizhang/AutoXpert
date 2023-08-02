@@ -60,9 +60,9 @@ const AutomobileList = () => {
             {col1.map(automobile => {
             return (
                 <div key={automobile.vin}>
-                    < HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
                     <Card style={{ width: '25rem' }}>
                         <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
+                        < HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
                         <Card.Body>
                             <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
@@ -94,9 +94,9 @@ const AutomobileList = () => {
             {col2.map(automobile => {
             return (
                 <div key={automobile.vin}>
-                < HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
                 <Card  style={{ width: '25rem' }}>
                     <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
+                    < HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
                     <Card.Body>
                         <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
@@ -127,9 +127,9 @@ const AutomobileList = () => {
             {col3.map(automobile => {
             return (
                 <div key={automobile.vin}>
-                <HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
                 <Card style={{ width: '25rem' }}>
                     <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
+                    <HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
                     <Card.Body>
                         <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
