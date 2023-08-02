@@ -181,5 +181,7 @@ code {
 
 .go4268192979, .go2484888251 {
   position: sticky;
-  margin-top: -3em;
+  margin-top: -1em;
+  background-color: white !important;
+  border-radius: 50%;
 }
