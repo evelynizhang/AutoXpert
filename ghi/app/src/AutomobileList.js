@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import Card from 'react-bootstrap/Card';
-import Carousel from 'react-bootstrap/Carousel';
 import './index.css'
 
 
@@ -49,13 +48,13 @@ const AutomobileList = () => {
             col = 0;
         }
     }
-    console.log("SOLD", soldCars);
+    console.log("UNSOLD", unsoldCars);
 
     return (
         <>
         <div className='vehicle-container'>
         <div className='container'>
-            <h1>Unsold Automobiles</h1>
+            <h1>Available Automobiles</h1>
             <div className='row sold'>
             <div className='col '>
             {col1.map(automobile => {
@@ -66,7 +65,20 @@ const AutomobileList = () => {
                         <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
                         <Card.Text>
-                        Extra information or short description regarding automobile.
+                            <div>
+                            <button>
+                                {automobile.type}
+                            </button>
+                            <button>
+                                $ {automobile.dealer_price}
+                            </button>
+                            <button>
+                                {automobile.mileage} miles
+                            </button>
+                            </div>
+                            <p>
+                            Extra information or short description regarding automobile.
+                            </p>
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
@@ -84,7 +96,20 @@ const AutomobileList = () => {
                         <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
                         <Card.Text>
-                        Extra information or short description regarding automobile.
+                        <div>
+                            <button>
+                                {automobile.type}
+                            </button>
+                            <button>
+                                $ {automobile.dealer_price}
+                            </button>
+                            <button>
+                                {automobile.mileage} miles
+                            </button>
+                            </div>
+                            <p>
+                            Extra information or short description regarding automobile.
+                            </p>
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
@@ -101,7 +126,20 @@ const AutomobileList = () => {
                         <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
                         <Card.Text>
-                        Extra information or short description regarding automobile.
+                        <div>
+                            <button>
+                                {automobile.type}
+                            </button>
+                            <button>
+                                $ {automobile.dealer_price}
+                            </button>
+                            <button>
+                                {automobile.mileage} miles
+                            </button>
+                            </div>
+                            <p>
+                            Extra information or short description regarding automobile.
+                            </p>
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
@@ -112,16 +150,16 @@ const AutomobileList = () => {
             </div>
         </div>
         <div className='sold-container'>
-            <h1>Sold Vehicles</h1>
+            <h1>Sold Automobiles</h1>
             <div className='sold-vehicle-container'>
                 {soldCars.map((automobile) => {
                     return (
                         <Card style={{ width: '20rem' }}>
-                    <Card.Img className='sold-car-img' variant="top" src={automobile.model.picture_url} />
-                    <Card.Body>
-                        <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">{automobile.vin}</Card.Subtitle>
-                    </Card.Body>
+                        <Card.Img className='sold-car-img' variant="top" src={automobile.model.picture_url} />
+                        <Card.Body>
+                            <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">{automobile.vin}</Card.Subtitle>
+                        </Card.Body>
                 </Card>
                     );
                 })}

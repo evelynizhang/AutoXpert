@@ -1,7 +1,10 @@
 from django.db import models
 from django.urls import reverse
 
-
+AUTOMOBILE_TYPE_CHOICES = (
+    ("used", "used"),
+    ("new", "new"),
+)
 class Manufacturer(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
@@ -22,12 +25,19 @@ class VehicleModel(models.Model):
     def get_api_url(self):
         return reverse("api_vehicle_model", kwargs={"pk": self.id})
 
+    def __str__(self):
+        return self.name
 
 class Automobile(models.Model):
     color = models.CharField(max_length=50)
     year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
     sold = models.BooleanField(default=False)
+    type = models.CharField(max_length=30,
+                            choices = AUTOMOBILE_TYPE_CHOICES,
+                            null=True)
+    mileage = models.PositiveIntegerField()
+    dealer_price = models.PositiveIntegerField()
 
     model = models.ForeignKey(
         VehicleModel,
