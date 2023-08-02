@@ -2,9 +2,8 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 import json
 from django.http import JsonResponse
-from .models import AutomobileVO, Appointment,Technician
+from .models import AutomobileVO, Appointment, Technician
 from common.json import ModelEncoder
-
 
 
 class TechnicianEncoder(ModelEncoder):

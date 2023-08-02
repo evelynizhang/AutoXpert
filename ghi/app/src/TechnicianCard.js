@@ -67,7 +67,6 @@ function TechnicianCard(props) {
   }
 
   const toggleFavorite = (technicianId) => {
-    console.log(technicianId)
     if (favorite.some((technician) => technician.id === technicianId)) {
       // Technician is already in the favorite list, so remove it
       handleNotFavorite(technicianId);
@@ -86,7 +85,6 @@ function TechnicianCard(props) {
     <div className="col">
       {props.list.map(data => {
         const technician = data.technicians;
-        console.log(technician)
         if (technician.is_favorite === false) {
           return (
             <div key={technician.id} className="card mb-3 h-50" >
