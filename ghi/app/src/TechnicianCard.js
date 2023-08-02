@@ -25,7 +25,7 @@ function TechnicianCard(props) {
 
     if (response.ok) {
       const data = await response.json()
-      const app = data.technicians.filter(technician => technician.is_favortie === "True")
+      const app = data.technicians.filter(technician => technician.is_favorite === true)
       setFavorite(app)
     }
   }
@@ -33,7 +33,6 @@ function TechnicianCard(props) {
   useEffect(() => {
     getData()
   }, [])
-
 
   const handleFavorite = (technicianId) => {
     fetch(`http://localhost:8080/api/technicians/${technicianId}/favorite/`,{
@@ -53,8 +52,8 @@ function TechnicianCard(props) {
       });
 
       setFavorite(updateFavorite);
-      setShowMessage(true);
-      setTimeout(() => setShowMessage(false), 1000);
+      // setShowMessage(true);
+      // setTimeout(() => setShowMessage(false), 1000);
     })
   }
 
@@ -68,19 +67,28 @@ function TechnicianCard(props) {
     })
     .then((response) => {
 
-      setFavorite((prevFavorites) => prevFavorites.filter((technician) => technician.id !== technicianId));
-      setShowMessage(true);
-      setTimeout(() => setShowMessage(false), 1000);
-    });
-  };
+      const updateFavorite = favorite.map((technician) => {
+        if (technician.id === technicianId) {
+          return { ...technician, is_favorite: "False" };
+        }
+        return technician;
+      });
+
+      setFavorite(updateFavorite);
+      // setShowMessage(true);
+      // setTimeout(() => setShowMessage(false), 1000);
+    })
+  }
 
   const toggleFavorite = (technicianId) => {
     if (favorite.some((technician) => technician.id === technicianId)) {
       // Technician is already in the favorite list, so remove it
       handleNotFavorite(technicianId);
+      console.log("no")
     } else {
       // Technician is not in the favorite list, so add it
       handleFavorite(technicianId);
+      console.log("yes")
     }
   };
 
