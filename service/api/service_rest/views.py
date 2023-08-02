@@ -9,12 +9,12 @@ from common.json import ModelEncoder
 
 class TechnicianEncoder(ModelEncoder):
    model = Technician
-   properties = ["first_name", "last_name", "employee_id","id","picture_url"]
+   properties = ["first_name", "last_name", "employee_id","id","picture_url", "is_favorite"]
 
 
 class TechnicianDetailEncoder(ModelEncoder):
    model = Technician
-   properties = ["employee_id","first_name", "last_name","id","picture_url"]
+   properties = ["employee_id","first_name", "last_name","id","picture_url", "is_favorite"]
 
 
 class AutomobileVOEncoder(ModelEncoder):
@@ -161,3 +161,38 @@ def api_status_finished(request, pk):
           return JsonResponse({"appointments": appointment}, encoder=AppointmentEncoder, safe=False)
        except Appointment.DoesNotExist:
           return JsonResponse({"message": "invalid appointment id"}, status=400)
+
+
+
+@require_http_methods(["GET"])
+def api_list_isFavorite(request):
+    if request.method == "GET":
+        try:
+            technicians = Technician.objects.filter(is_favorite=True)
+            return JsonResponse({"technicians": technicians}, encoder=TechnicianDetailEncoder, safe=False)
+        except Exception:
+            return JsonResponse(status = 400)
+
+
+@require_http_methods(["PUT"])
+def api_isFavorite_true(request, pk):
+   if request.method == "PUT":
+       try:
+          technician = Technician.objects.get(id=pk)
+          technician.is_favorite = "True"
+          technician.save()
+          return JsonResponse({"technicians": technician}, encoder=TechnicianDetailEncoder, safe=False)
+       except Appointment.DoesNotExist:
+          return JsonResponse({"message": "invalid technician id"}, status=400)
+
+
+@require_http_methods(["PUT"])
+def api_isFavorite_false(request, pk):
+   if request.method == "PUT":
+       try:
+          technician = Technician.objects.get(id=pk)
+          technician.is_favorite = "False"
+          technician.save()
+          return JsonResponse({"technicians": technician}, encoder=TechnicianDetailEncoder, safe=False)
+       except Appointment.DoesNotExist:
+          return JsonResponse({"message": "invalid technician id"}, status=400)

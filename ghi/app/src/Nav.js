@@ -1,17 +1,17 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import './nav.css'
 import { NavLink } from 'react-router-dom';
-import {useState} from "react"
 import Header from './Header';
 
 
 const Nav = () => {
+    const carWheelUrl = process.env.PUBLIC_URL+"/car-wheel.svg"
     return (
         <>
         <div className='header-container'>
         <div className='navbar'>
         <div className='brand'>
-            <img className='icon' src='car-wheel.svg' />
+            <img className='icon' src={carWheelUrl} />
             <NavLink className="navbar-brand" to="/">CarCar</NavLink>
         </div>
         <div className='navbar-right'>
@@ -34,6 +34,7 @@ const Nav = () => {
         </Dropdown.Toggle>
         <Dropdown.Menu>
             <Dropdown.Item href="/technicians/">Technicians</Dropdown.Item>
+            <Dropdown.Item href="/technicians/favorite">Favorite Technicians</Dropdown.Item>
             <Dropdown.Item href="/technicians/create">Add a Technician</Dropdown.Item>
             <Dropdown.Item href="/appointments/">Appointments</Dropdown.Item>
             <Dropdown.Item href="/appointments/create">Add an Appointment</Dropdown.Item>
