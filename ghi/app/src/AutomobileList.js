@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import './index.css'
+import HeartWrapper from './AutomobileReactions';
 
 
 const AutomobileList = () => {
@@ -58,30 +59,33 @@ const AutomobileList = () => {
             <div className='col '>
             {col1.map(automobile => {
             return (
-                <Card key={automobile.vin} style={{ width: '25rem' }}>
-                    <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
-                    <Card.Body>
-                        <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
-                        <Card.Text>
-                            <div>
-                            <button>
-                                {automobile.type}
-                            </button>
-                            <button>
-                                $ {automobile.dealer_price}
-                            </button>
-                            <button>
-                                {automobile.mileage} miles
-                            </button>
-                            </div>
-                            <p>
-                            Extra information or short description regarding automobile.
-                            </p>
-                        </Card.Text>
-                    </Card.Body>
-                    <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
-                </Card>
+                <div key={automobile.vin}>
+                    < HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
+                    <Card style={{ width: '25rem' }}>
+                        <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
+                        <Card.Body>
+                            <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
+                            <Card.Text>
+                                <div>
+                                <button>
+                                    {automobile.type}
+                                </button>
+                                <button>
+                                    $ {automobile.dealer_price}
+                                </button>
+                                <button>
+                                    {automobile.mileage} miles
+                                </button>
+                                </div>
+                                <p>
+                                Extra information or short description regarding automobile.
+                                </p>
+                            </Card.Text>
+                        </Card.Body>
+                        <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
+                    </Card>
+                </div>
             )
             })}
             </div>
@@ -89,7 +93,9 @@ const AutomobileList = () => {
 
             {col2.map(automobile => {
             return (
-                <Card key={automobile.vin} style={{ width: '25rem' }}>
+                <div key={automobile.vin}>
+                < HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
+                <Card  style={{ width: '25rem' }}>
                     <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
                     <Card.Body>
                         <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
@@ -113,13 +119,16 @@ const AutomobileList = () => {
                     </Card.Body>
                     <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
                 </Card>
+            </div>
             )
             })}
             </div>
             <div className='col'>
             {col3.map(automobile => {
             return (
-                <Card key={automobile.vin} style={{ width: '25rem' }}>
+                <div key={automobile.vin}>
+                <HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
+                <Card style={{ width: '25rem' }}>
                     <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
                     <Card.Body>
                         <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
@@ -143,6 +152,7 @@ const AutomobileList = () => {
                     </Card.Body>
                     <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
                 </Card>
+                </div>
             )
             })}
             </div>
