@@ -1,9 +1,5 @@
 import React, {useEffect, useState} from "react";
 import Heart from "react-animated-heart";
-import ReactSwitch from 'react-switch';
-
-
-
 
 
 
@@ -46,8 +42,6 @@ function TechnicianCard(props) {
       });
 
       setFavorite(updateFavorite);
-      // setShowMessage(true);
-      // setTimeout(() => setShowMessage(false), 1000);
     })
   }
 
@@ -69,21 +63,22 @@ function TechnicianCard(props) {
       });
 
       setFavorite(updateFavorite);
-      // setShowMessage(true);
-      // setTimeout(() => setShowMessage(false), 1000);
     })
   }
 
   const toggleFavorite = (technicianId) => {
+    console.log(technicianId)
     if (favorite.some((technician) => technician.id === technicianId)) {
       // Technician is already in the favorite list, so remove it
       handleNotFavorite(technicianId);
       console.log("no")
+
     } else {
       // Technician is not in the favorite list, so add it
       handleFavorite(technicianId);
       console.log("yes")
     }
+
   };
 
 
