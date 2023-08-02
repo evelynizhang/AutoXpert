@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-// import HeartIcon from "./heart";
 import Heart from "react-animated-heart";
 import ReactSwitch from 'react-switch';
 
@@ -11,12 +10,7 @@ import ReactSwitch from 'react-switch';
 function TechnicianCard(props) {
   const[favorite, setFavorite] = useState([])
   const[isClick, setClick] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
-  const [checked, setChecked] = useState(false);
 
-  const handleChange = val => {
-    setChecked(val)
-  }
 
 
   const getData = async () => {
@@ -94,35 +88,41 @@ function TechnicianCard(props) {
 
 
 
-
   return (
     <div className="col">
       {props.list.map(data => {
         const technician = data.technicians;
-        return (
-          <div key={technician.id} className="card mb-3 h-50" >
-            <img src={technician.picture_url} className="card-img-top" alt="..." height="300" />
-
-            <div className="card-body">
-              <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
-              <Heart isClick={isClick}
-              onClick={() => {
-                setClick(!isClick);
-                toggleFavorite(technician.id)
-                }
-                } />
-              {/* <button onClick={() => {handleFavorite(technician.id)}} >Add to Favorite</button>
-              {showMessage && <p>Added to Favorite!</p>}
-              <button onClick={() => {handleNotFavorite(technician.id)}} >Delete from Favorite</button>
-              {showMessage && <p>Delete from Favorite!</p>}
-              <ReactSwitch
-        checked={checked}
-        onChange={handleChange}
-      /> */}
+        console.log(technician)
+        if (technician.is_favorite === false) {
+          return (
+            <div key={technician.id} className="card mb-3 h-50" >
+              <img src={technician.picture_url} className="card-img-top" alt="..." height="300" />
+              <div className="card-body">
+                <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
+                <Heart isClick={isClick}
+                onClick={() => {
+                  setClick(!isClick);
+                  toggleFavorite(technician.id)
+                  }
+                  } />
             </div>
-          </div>
-        );
-      })}
+            </div>)}
+        else {
+          return (
+            <div key={technician.id} className="card mb-3 h-50" >
+              <img src={technician.picture_url} className="card-img-top" alt="..." height="300" />
+              <div className="card-body">
+                <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
+                <Heart isClick={!isClick}
+                onClick={() => {
+                  setClick(!isClick);
+                  toggleFavorite(technician.id)
+                  }
+                  } />
+            </div>
+            </div>)
+        }
+        })}
     </div>
   );
 }
