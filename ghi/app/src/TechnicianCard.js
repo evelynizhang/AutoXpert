@@ -82,7 +82,6 @@ function TechnicianCard(props) {
   };
 
 
-
   return (
     <div className="col">
       {props.list.map(data => {
