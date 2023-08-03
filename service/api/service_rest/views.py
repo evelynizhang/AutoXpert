@@ -34,7 +34,7 @@ class AppointmentEncoder(ModelEncoder):
 def api_list_technicians(request):
     if request.method == "GET":
        try:
-          technicians = Technician.objects.all()
+          technicians = Technician.objects.all().order_by("id")
           return JsonResponse({"technicians": technicians}, encoder=TechnicianEncoder, safe=False)
        except Exception:
           return JsonResponse(status = 400)
