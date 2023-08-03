@@ -141,7 +141,6 @@ code {
   background-color: #ffcb5d;
   padding: .2em .5em;
   box-shadow: -1px -1px 3px #f0eded;
-
 }
 
 .card-img-top {
@@ -205,6 +204,10 @@ code {
   box-shadow: -1px -1px 3px #f0eded;
 }
 
+.sold-vehicle-container .card-body {
+  padding-top: 1rem;
+}
+
 .sold-car-img {
   width: 100%;
   height: 10vw;
@@ -213,8 +216,7 @@ code {
 
 .go4268192979, .go2484888251 {
   position: sticky;
-  margin-top: -.5em;
-  background-color: white !important;
+  margin-top: -1em;
   border-radius: 50%;
 }
 
