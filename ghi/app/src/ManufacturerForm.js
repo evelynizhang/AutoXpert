@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './forms.css'
 
 function ManufacturerForm() {
   const [formData, setFormData] = useState({
@@ -40,10 +41,13 @@ function ManufacturerForm() {
 
 
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-          <h1>Create a Manufacturer</h1>
+    <div className="row form-outer">
+      <div className="offset-3 col-6 form-inner">
+      <div className='form-image manufacturer-form'>
+                    <p>image</p>
+                </div>
+        <div className="shadow p-4 mt-4 myform ">
+          <h1>Add Car Manufacturer</h1>
           <form onSubmit={handleSubmit} id="create-shoe-form">
             <div className="form-floating mb-3">
               <input onChange={handleFormChange} value={formData.name} placeholder="First Name" required type="text" name="name" id="name" className="form-control" />
