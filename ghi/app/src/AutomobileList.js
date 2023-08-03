@@ -61,9 +61,9 @@ const AutomobileList = () => {
             <div className='sold-vehicle-container'>
                 {soldCars.map((automobile) => {
                     return (
-                        <div>
+                        <div key={automobile.vin}>
                             <button>SOLD</button>
-                        <Card key={automobile.vin} style={{ width: '20rem' }}>
+                        <Card style={{ width: '20rem' }}>
                         <Card.Img className='sold-car-img' variant="top" src={automobile.model.picture_url} />
                         <Card.Body>
                             <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>

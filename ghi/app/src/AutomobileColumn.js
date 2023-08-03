@@ -15,7 +15,7 @@ const AutomobileColumn = (props) => {
                     <Card.Body>
                         <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
-                        <Card.Text>
+                        <div className='card-info'>
                             <div>
                             <button>
                                 {automobile.type}
@@ -30,7 +30,7 @@ const AutomobileColumn = (props) => {
                             <p>
                             Extra information or short description regarding automobile.
                             </p>
-                        </Card.Text>
+                        </div>
                     </Card.Body>
                     <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
                 </Card>

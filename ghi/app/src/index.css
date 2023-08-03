@@ -12,6 +12,9 @@ code {
     monospace;
 }
 
+.container {
+  margin-bottom: 2em;
+}
 
 .automobile-img {
   width: 100%;
@@ -62,7 +65,6 @@ code {
 .inventory-container {
   background-image: url('../public/shapes.png');
   background-position-y: 25%;
-  padding-bottom: 3em;
 }
 
 .inventory-container p {
@@ -120,7 +122,7 @@ code {
   z-index: 10;
 }
 
-.card-text {
+.card-info {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -128,12 +130,12 @@ code {
   margin-bottom: 0em;
 }
 
-.card-text div {
+.card-info div {
   display: flex;
   justify-content: space-around;
 }
 
-.card-text button {
+.card-info button {
   border-radius: .7em;
   border: none;
   background-color: #ffcb5d;
