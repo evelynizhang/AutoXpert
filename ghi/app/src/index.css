@@ -223,3 +223,11 @@ code {
 .heart {
   width: 50px;
 }
+
+.cancel-button {
+  background-color: #ffcb5d;
+}
+
+.finish-button {
+  background-color:  #44515c90;
+}

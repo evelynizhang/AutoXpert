@@ -69,7 +69,7 @@ function ServiceForm() {
   return (
     <div className="row form-outer">
       <div className="offset-3 col-6 form-inner">
-        <div className='form-image'>
+        <div className='form-image automobile-form'>
             <p>image</p>
         </div>
         <div className="shadow p-4 mt-4 myform">

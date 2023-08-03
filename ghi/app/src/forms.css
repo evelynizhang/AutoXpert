@@ -97,3 +97,10 @@
 .model-form:after {
     margin: 19em -5em 0em -1em;
 }
+
+.technician-form {
+    background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bWVjaGFuaWN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60');
+}
+.technician-form:after {
+    margin: 27em -5em 0em -1em;
+}
