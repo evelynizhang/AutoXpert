@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import "./index.css"
 
 function VehicleList() {
   const[models, setModels] = useState([])
@@ -35,7 +35,7 @@ function VehicleList() {
               <tr key={model.href}>
                 <td>{ model.name}</td>
                 <td>{ model.manufacturer.name }</td>
-                <td><img src={ model.picture_url} className="card-img-top" alt="shoe" width="10" height="200" /></td>
+                <td><img src={ model.picture_url} className="model-img card-img-top" alt="shoe" width="10" height="200" /></td>
               </tr>
             );
           })}

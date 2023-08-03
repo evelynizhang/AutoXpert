@@ -68,9 +68,10 @@ code {
 }
 
 .inventory-container p {
-  background-color: #9ca1a7;
+  background-color: white;
   border-radius: 0em 0em .5em .5em;
   padding: .5em 0em;
+  border: 1px solid #dfdfdf;
 }
 
 .footer {
@@ -222,6 +223,10 @@ code {
 
 .heart {
   width: 50px;
+}
+
+.model-img {
+  width: 50% !important;
 }
 
 .cancel-button {
