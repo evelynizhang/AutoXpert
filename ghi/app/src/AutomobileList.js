@@ -6,6 +6,7 @@ import AutomobileColumn from './AutomobileColumn';
 const AutomobileList = () => {
     const[soldCars, setSoldCars] = useState([]);
     const[unsoldCars, setUnsoldCars] = useState([]);
+    const[allUnsold, setAllUnsold] = useState([]);
 
     const fetchAutomobiles = async () => {
         const automobilesUrl = 'http://localhost:8100/api/automobiles/';
@@ -19,6 +20,7 @@ const AutomobileList = () => {
                 const unsold = data.autos.filter(auto => (auto.sold === false));
                 setSoldCars(sold);
                 setUnsoldCars(unsold);
+                setAllUnsold(unsold)
             }
         } catch(e) {
             console.log(e, "There was a problem fetching automobiles")
@@ -29,11 +31,25 @@ const AutomobileList = () => {
         fetchAutomobiles();
     },[]);
 
+    function handleFavoriteDisplay() {
+        const favoriteCars = unsoldCars.filter(car => (car.is_favorite === true));
+        setUnsoldCars(favoriteCars);
+    }
+    function handleAllDisplay() {
+        setUnsoldCars(allUnsold);
+    }
+
     return (
         <>
         <div className='vehicle-container'>
         <div className='container unsold-container'>
-            <h1>Available Automobiles</h1>
+            <div className='button-container'>
+                <h1>Available Automobiles</h1>
+                <div>
+                <button onClick={handleFavoriteDisplay}>Favorites</button>
+                <button onClick={handleAllDisplay}>All Cars</button>
+                </div>
+            </div>
             <div className='row sold'>
                 {groupUnsoldCars(unsoldCars).map((col, index) => (
                     <AutomobileColumn key={index} col={col} fetchAutomobiles={fetchAutomobiles} />

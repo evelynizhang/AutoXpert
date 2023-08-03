@@ -13,7 +13,7 @@ from .models import Automobile, Manufacturer, VehicleModel
 @require_http_methods(["GET", "POST"])
 def api_automobiles(request):
     if request.method == "GET":
-        autos = Automobile.objects.all()
+        autos = Automobile.objects.all().order_by("id")
         return JsonResponse(
             {"autos": autos},
             encoder=AutomobileEncoder,

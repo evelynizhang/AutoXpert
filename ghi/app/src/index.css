@@ -90,6 +90,31 @@ code {
   padding: 0rem 1rem 0em 1rem;
 }
 
+.button-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container > div:nth-child(even) {
+  display: flex;
+  gap: 1em;
+}
+.button-container button {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: .375em;
+  color: #363636;
+  cursor: pointer;
+  height: 2.5em;
+  padding: calc(.5em - 1px) 1em;
+}
+
+.button-container button:hover,
+.button-container button:focus {
+  border: 1px solid #b5b5b5;
+  transform: scale(1.02);
+}
+
 .unsold-container .card-body {
   margin-top: -1em;
   z-index: 10;
