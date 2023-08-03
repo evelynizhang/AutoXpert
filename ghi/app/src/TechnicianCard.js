@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from "react";
-import Heart from "react-animated-heart";
+// import Heart from "react-animated-heart";
+import Heart from "react-heart"
+import './index.css'
+
 
 
 
@@ -102,8 +105,8 @@ console.log("PROPS LIST", props.list)
             <img src={technician.picture_url} className="card-img-top" alt="..." height="300" />
             <div className="card-body">
               <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
-              <Heart
-                isClick={technician.is_favorite}
+              <Heart className="heart"
+                isActive={technician.is_favorite}
                 onClick={() => {
                   // setClick(!isClick);
                   toggleFavorite(technician.id, technician.is_favorite)

@@ -217,3 +217,7 @@ code {
   background-color: white !important;
   border-radius: 50%;
 }
+
+.heart {
+  width: 50px;
+}
