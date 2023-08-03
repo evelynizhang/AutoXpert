@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
+
 }
 
 .myform h1 {
@@ -25,6 +26,8 @@
 .myform input, .myform select {
     border-radius: 1em;
 }
+
+
 
 .myform button {
     background-color: #ffcb5d;
@@ -50,6 +53,18 @@
     width: 50%;
     border-top-left-radius: .5em;
     position:relative;
+}
+
+.technician-form-image {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY4MX3qf4EaaopdgsWUK3eDm9UzMqWqAe14A&usqp=CAU');
+    background-position: center;
+    width: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-top-left-radius: .5em;
+    position:relative;
+    padding-right: 0%;
+    margin-right: 0%;
 }
 
 .form-image:after {

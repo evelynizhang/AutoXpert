@@ -44,22 +44,22 @@ function TechnicianForm() {
 
 
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
+    <div className="row form-outer">
+      <div className="offset-3 col-6 form-inner">
+        <div className='technician-form-image'>
+
+        </div>
+        <div className="shadow p-4 mt-4 myform">
           <h1>Add a Technician</h1>
-          <form onSubmit={handleSubmit} id="create-shoe-form">
-            <div className="form-floating mb-3">
-              <input onChange={handleFormChange} value={formData.first_name} placeholder="First Name" required type="text" name="first_name" id="first_name" className="form-control" />
-              <label htmlFor="first_name">First Name</label>
+          <form onSubmit={handleSubmit} id="create-shoe-form myform">
+            <div className="mb-3">
+              <input onChange={handleFormChange} value={formData.first_name} placeholder="FirstName" required type="text" name="first_name" id="first_name" className="form-control" />
             </div>
-            <div className="form-floating mb-3">
+            <div className="mb-3">
               <input onChange={handleFormChange} value={formData.last_name} placeholder="Last Name" required type="text" name="last_name" id="last_name" className="form-control" />
-              <label htmlFor="last_name">Last Name</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="mb-3">
               <input onChange={handleFormChange} value={formData.employee_id} placeholder="Employee ID" required type="text" name="employee_id" id="employee_id" className="form-control" />
-              <label htmlFor="employee_id">Employee ID</label>
             </div>
             <button className="btn btn-primary">Create</button>
           </form>

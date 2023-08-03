@@ -67,26 +67,25 @@ function ServiceForm() {
   }
 
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
+    <div className="row form-outer">
+      <div className="offset-3 col-6 form-inner">
+        <div className='form-image'>
+            <p>image</p>
+        </div>
+        <div className="shadow p-4 mt-4 myform">
           <h1>Create a Service Appointment</h1>
           <form onSubmit={handleSubmit} id="create-shoe-form">
-            <div className="form-floating mb-3">
+            <div className="mb-3">
               <input onChange={handleFormChange} value={formData.vin} placeholder="Automobile VIN" required type="text" name="vin" id="vin" className="form-control" />
-              <label htmlFor="vin">Automobile VIN</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="mb-3">
               <input onChange={handleFormChange} value={formData.customer} placeholder="Customer" required type="text" name="customer" id="customer" className="form-control" />
-              <label htmlFor="customer">Customer</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="mb-3">
               <input onChange={handleFormChange} value={formData.date} placeholder="Date" required type="date" name="date" id="date" className="form-control" />
-              <label htmlFor="Date">Date</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="mb-3">
               <input onChange={handleFormChange} value={formData.time} placeholder="Time" required type="time" name="time" id="time" className="form-control" />
-              <label htmlFor="Time">Time</label>
             </div>
             <div className="mb-3">
               <select onChange={handleFormChange} value={formData.technician} required name="technician" id="technician" className="form-select">
@@ -98,9 +97,8 @@ function ServiceForm() {
                 })}
               </select>
             </div>
-            <div className="form-floating mb-3">
+            <div className="mb-3">
               <input onChange={handleFormChange} value={formData.reason} placeholder="Reason" required type="text" name="reason" id="reason" className="form-control" />
-              <label htmlFor="reason">Reason</label>
             </div>
             <button className="btn btn-primary">Create</button>
           </form>
