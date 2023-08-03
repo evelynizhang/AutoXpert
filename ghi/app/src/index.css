@@ -87,7 +87,12 @@ code {
 }
 
 .card-body {
-  padding: 1rem 1rem 0em 1rem;
+  padding: 0rem 1rem 0em 1rem;
+}
+
+.unsold-container .card-body {
+  margin-top: -1em;
+  z-index: 10;
 }
 
 .card-text {
@@ -181,7 +186,7 @@ code {
 
 .go4268192979, .go2484888251 {
   position: sticky;
-  margin-top: -1em;
+  margin-top: -.5em;
   background-color: white !important;
   border-radius: 50%;
 }

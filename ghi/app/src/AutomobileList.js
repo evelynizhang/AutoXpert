@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import './index.css'
-import HeartWrapper from './AutomobileReactions';
-
+import AutomobileColumn from './AutomobileColumn';
 
 const AutomobileList = () => {
     const[soldCars, setSoldCars] = useState([]);
@@ -30,132 +29,15 @@ const AutomobileList = () => {
         fetchAutomobiles();
     },[]);
 
-    const col1 = []
-    const col2 = []
-    const col3 = []
-    const col4 = []
-    let col = 0;
-    for (const car of unsoldCars) {
-        if (col === 0) {
-            col1.push(car);
-            col += 1;
-        }
-        else if (col === 1) {
-            col2.push(car);
-            col += 1;
-        }
-        else {
-            col3.push(car);
-            col = 0;
-        }
-    }
-
     return (
         <>
         <div className='vehicle-container'>
-        <div className='container'>
+        <div className='container unsold-container'>
             <h1>Available Automobiles</h1>
             <div className='row sold'>
-            <div className='col '>
-            {col1.map(automobile => {
-            return (
-                <div key={automobile.vin}>
-                    <Card style={{ width: '25rem' }}>
-                        <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
-                        < HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
-                        <Card.Body>
-                            <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
-                            <Card.Text>
-                                <div>
-                                <button>
-                                    {automobile.type}
-                                </button>
-                                <button>
-                                    $ {automobile.dealer_price}
-                                </button>
-                                <button>
-                                    {automobile.mileage} miles
-                                </button>
-                                </div>
-                                <p>
-                                Extra information or short description regarding automobile.
-                                </p>
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
-                    </Card>
-                </div>
-            )
-            })}
-            </div>
-            <div className='col'>
-
-            {col2.map(automobile => {
-            return (
-                <div key={automobile.vin}>
-                <Card  style={{ width: '25rem' }}>
-                    <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
-                    < HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
-                    <Card.Body>
-                        <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
-                        <Card.Text>
-                        <div>
-                            <button>
-                                {automobile.type}
-                            </button>
-                            <button>
-                                $ {automobile.dealer_price}
-                            </button>
-                            <button>
-                                {automobile.mileage} miles
-                            </button>
-                            </div>
-                            <p>
-                            Extra information or short description regarding automobile.
-                            </p>
-                        </Card.Text>
-                    </Card.Body>
-                    <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
-                </Card>
-            </div>
-            )
-            })}
-            </div>
-            <div className='col'>
-            {col3.map(automobile => {
-            return (
-                <div key={automobile.vin}>
-                <Card style={{ width: '25rem' }}>
-                    <Card.Img className='card-img-top' variant="top" src={automobile.model.picture_url} />
-                    <HeartWrapper automobile={automobile} fetchAutomobiles={fetchAutomobiles}/>
-                    <Card.Body>
-                        <Card.Title>{automobile.year} {automobile.model.name}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">{automobile.model.manufacturer.name}</Card.Subtitle>
-                        <Card.Text>
-                        <div>
-                            <button>
-                                {automobile.type}
-                            </button>
-                            <button>
-                                $ {automobile.dealer_price}
-                            </button>
-                            <button>
-                                {automobile.mileage} miles
-                            </button>
-                            </div>
-                            <p>
-                            Extra information or short description regarding automobile.
-                            </p>
-                        </Card.Text>
-                    </Card.Body>
-                    <Card.Footer className="text-muted card-footer">{automobile.vin}</Card.Footer>
-                </Card>
-                </div>
-            )
-            })}
-            </div>
+                {groupUnsoldCars(unsoldCars).map((col, index) => (
+                    <AutomobileColumn key={index} col={col} fetchAutomobiles={fetchAutomobiles} />
+                ))}
             </div>
         </div>
         <div className='sold-container'>
@@ -181,6 +63,27 @@ const AutomobileList = () => {
         </div>
         </>
     );
+}
+
+const groupUnsoldCars = (unsoldCars) => {
+    const groups = [[], [], []];
+    let col = 0;
+    for (const car of unsoldCars) {
+        if (col === 0) {
+            groups[0].push(car);
+            col += 1;
+        }
+        else if (col === 1) {
+            groups[1].push(car);
+            col += 1;
+        }
+        else {
+            groups[2].push(car);
+            col = 0;
+        }
+    }
+
+    return groups;
 }
 
 export default AutomobileList;
