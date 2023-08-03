@@ -4,25 +4,25 @@ import Heart from "react-animated-heart";
 
 
 function TechnicianCard(props) {
-  const[favorite, setFavorite] = useState([])
-  const[isClick, setClick] = useState(false);
+  // const[favorite, setFavorite] = useState([])
+  // const[isClick, setClick] = useState(false);
 
 
 
-  const getData = async () => {
-    const url = "http://localhost:8080/api/technicians/favorite/";
-    const response = await fetch(url)
+  // const getData = async () => {
+  //   const url = "http://localhost:8080/api/technicians/favorite/";
+  //   const response = await fetch(url)
 
-    if (response.ok) {
-      const data = await response.json()
-      const app = data.technicians.filter(technician => technician.is_favorite === true)
-      setFavorite(app)
-    }
-  }
+  //   if (response.ok) {
+  //     const data = await response.json()
+  //     const app = data.technicians.filter(technician => technician.is_favorite === true)
+  //     setFavorite(app)
+  //   }
+  // }
 
-  useEffect(() => {
-    getData()
-  }, [])
+  // useEffect(() => {
+  //   getData()
+  // }, [])
 
   const handleFavorite = (technicianId) => {
     fetch(`http://localhost:8080/api/technicians/${technicianId}/favorite/`,{
@@ -34,14 +34,14 @@ function TechnicianCard(props) {
     })
     .then((response) => {
 
-      const updateFavorite = favorite.map((technician) => {
-        if (technician.id === technicianId) {
-          return { ...technician, is_favorite: "True" };
-        }
-        return technician;
-      });
+      // const updateFavorite = favorite.map((technician) => {
+      //   if (technician.id === technicianId) {
+      //     return { ...technician, is_favorite: "True" };
+      //   }
+      //   return technician;
+      // });
 
-      setFavorite(updateFavorite);
+      // setFavorite(updateFavorite);
     })
   }
 
@@ -55,66 +55,64 @@ function TechnicianCard(props) {
     })
     .then((response) => {
 
-      const updateFavorite = favorite.map((technician) => {
-        if (technician.id === technicianId) {
-          return { ...technician, is_favorite: "False" };
-        }
-        return technician;
-      });
+      // const updateFavorite = favorite.map((technician) => {
+      //   if (technician.id === technicianId) {
+      //     return { ...technician, is_favorite: "False" };
+      //   }
+      //   return technician;
+      // });
 
-      setFavorite(updateFavorite);
+      // setFavorite(updateFavorite);
     })
   }
 
-  const toggleFavorite = (technicianId) => {
-    if (favorite.some((technician) => technician.id === technicianId)) {
-      // Technician is already in the favorite list, so remove it
+  const toggleFavorite = (technicianId, currentFavStatus) => {
+    if (currentFavStatus) {
       handleNotFavorite(technicianId);
-      console.log("no")
-
     } else {
-      // Technician is not in the favorite list, so add it
-      handleFavorite(technicianId);
-      console.log("yes")
+      handleFavorite(technicianId)
     }
+
+    if (props.fetchData) {
+      props.fetchData();
+    }
+
+    // console.log(technicianId)
+    // if (favorite.some((technician) => technician.id === technicianId)) {
+    //   // Technician is already in the favorite list, so remove it
+    //   handleNotFavorite(technicianId);
+    //   console.log("no")
+
+    // } else {
+    //   // Technician is not in the favorite list, so add it
+    //   handleFavorite(technicianId);
+    //   console.log("yes")
+    // }
 
   };
 
-
+console.log("PROPS LIST", props.list)
   return (
     <div className="col">
       {props.list.map(data => {
         const technician = data.technicians;
-        if (technician.is_favorite === false) {
-          return (
-            <div key={technician.id} className="card mb-3 h-50" >
-              <img src={technician.picture_url} className="card-img-top" alt="..." height="300" />
-              <div className="card-body">
-                <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
-                <Heart isClick={isClick}
+        console.log(technician)
+        return (
+          <div key={technician.id} className="card mb-3 h-50" >
+            <img src={technician.picture_url} className="card-img-top" alt="..." height="300" />
+            <div className="card-body">
+              <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
+              <Heart
+                isClick={technician.is_favorite}
                 onClick={() => {
-                  setClick(!isClick);
-                  toggleFavorite(technician.id)
-                  }
-                  } />
-            </div>
-            </div>)}
-        else {
-          return (
-            <div key={technician.id} className="card mb-3 h-50" >
-              <img src={technician.picture_url} className="card-img-top" alt="..." height="300" />
-              <div className="card-body">
-                <h5 className="card-title">{technician.first_name} {technician.last_name} </h5>
-                <Heart isClick={!isClick}
-                onClick={() => {
-                  setClick(!isClick);
-                  toggleFavorite(technician.id)
-                  }
-                  } />
-            </div>
-            </div>)
-        }
-        })}
+                  // setClick(!isClick);
+                  toggleFavorite(technician.id, technician.is_favorite)
+                }}
+              />
+          </div>
+          </div>)
+        })
+      }
     </div>
   );
 }

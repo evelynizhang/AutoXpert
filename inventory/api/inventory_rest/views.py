@@ -13,7 +13,7 @@ from .models import Automobile, Manufacturer, VehicleModel
 @require_http_methods(["GET", "POST"])
 def api_automobiles(request):
     if request.method == "GET":
-        autos = Automobile.objects.all()
+        autos = Automobile.objects.all().order_by("id")
         return JsonResponse(
             {"autos": autos},
             encoder=AutomobileEncoder,
@@ -68,7 +68,7 @@ def api_automobile(request, vin):
             content = json.loads(request.body)
             auto = Automobile.objects.get(vin=vin)
 
-            props = ["color", "year", "sold", "type", "mileage", "dealer_price"]
+            props = ["color", "year", "sold", "type", "mileage", "dealer_price", "is_favorite",]
             for prop in props:
                 if prop in content:
                     setattr(auto, prop, content[prop])

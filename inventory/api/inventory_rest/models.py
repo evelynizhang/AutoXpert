@@ -38,6 +38,7 @@ class Automobile(models.Model):
                             null=True)
     mileage = models.PositiveIntegerField()
     dealer_price = models.PositiveIntegerField()
+    is_favorite = models.BooleanField(default=False, null=True)
 
     model = models.ForeignKey(
         VehicleModel,

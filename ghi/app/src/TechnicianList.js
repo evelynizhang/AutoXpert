@@ -66,7 +66,7 @@ function TechnicianList(props) {
     <div className="row ">
           {technicianColumns.map((technicianList, index) => {
             return (
-              <TechnicianCard key={index} list={technicianList} />
+              <TechnicianCard key={index} list={technicianList} fetchData={fetchData} />
             );
           })}
         </div>
